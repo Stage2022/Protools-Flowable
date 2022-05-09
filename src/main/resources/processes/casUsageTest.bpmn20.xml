@@ -91,7 +91,7 @@
     <bpmn:sequenceFlow id="Flow_030lv4j" sourceRef="Gateway_0y69ydq" targetRef="saveSurveyInfo">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${surveyValid == true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:serviceTask id="Activity_14b1tdt" name="Abort Process Sample Size" flowable:delegateExpression="${EndProcess}">
+    <bpmn:serviceTask id="Activity_14b1tdt" name="Abort Process Sample Size" flowable:delegateExpression="${endProcess}">
       <bpmn:incoming>Flow_13lrsr1</bpmn:incoming>
       <bpmn:outgoing>Flow_04vgcgq</bpmn:outgoing>
     </bpmn:serviceTask>
