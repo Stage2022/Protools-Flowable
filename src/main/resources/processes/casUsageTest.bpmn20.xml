@@ -18,7 +18,7 @@
         <bpmn:outgoing>Flow_0t98vlv</bpmn:outgoing>
       </bpmn:startEvent>
       <bpmn:sequenceFlow id="Flow_0t98vlv" sourceRef="Event_0g6ye5t" targetRef="Activity_0ug3pz8" />
-      <bpmn:serviceTask id="Activity_0ug3pz8" name="Select Unit" flowable:delegateExpression="${DrawUnit}">
+      <bpmn:serviceTask id="Activity_0ug3pz8" name="Select Unit" flowable:delegateExpression="${drawUnit}">
         <bpmn:incoming>Flow_0t98vlv</bpmn:incoming>
         <bpmn:outgoing>Flow_0x3s1eq</bpmn:outgoing>
       </bpmn:serviceTask>
@@ -29,12 +29,12 @@
         <bpmn:outgoing>Flow_17baz8z</bpmn:outgoing>
         <bpmn:outgoing>Flow_0v75gto</bpmn:outgoing>
       </bpmn:parallelGateway>
-      <bpmn:serviceTask id="Activity_06n7cgg" name="Create Account" flowable:delegateExpression="${CreateAccount}">
+      <bpmn:serviceTask id="Activity_06n7cgg" name="Create Account" flowable:delegateExpression="${createAccount}">
         <bpmn:incoming>Flow_17baz8z</bpmn:incoming>
         <bpmn:outgoing>Flow_130f8tf</bpmn:outgoing>
       </bpmn:serviceTask>
       <bpmn:sequenceFlow id="Flow_0v75gto" sourceRef="Gateway_053s26d" targetRef="Activity_1rfb5zv" />
-      <bpmn:serviceTask id="Activity_1rfb5zv" name="Add to survey" flowable:delegateExpression="${AddToSurvey}">
+      <bpmn:serviceTask id="Activity_1rfb5zv" name="Add to survey" flowable:delegateExpression="${addToSurvey}">
         <bpmn:incoming>Flow_0v75gto</bpmn:incoming>
         <bpmn:outgoing>Flow_0fi4bip</bpmn:outgoing>
       </bpmn:serviceTask>
@@ -50,7 +50,7 @@
       </bpmn:endEvent>
       <bpmn:sequenceFlow id="Flow_0vkdg8s" sourceRef="Gateway_1i70z3j" targetRef="Event_0usmaxh" />
     </bpmn:subProcess>
-    <bpmn:serviceTask id="Activity_12yxcqh" name="Survey setStateReady" flowable:delegateExpression="${SurveyReady}">
+    <bpmn:serviceTask id="Activity_12yxcqh" name="Survey setStateReady" flowable:delegateExpression="${surveyReady}">
       <bpmn:incoming>Flow_0kiuoxx</bpmn:incoming>
       <bpmn:outgoing>Flow_13828zo</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -109,7 +109,7 @@
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_1hzrxux" sourceRef="Event_0en2i1e" targetRef="Activity_0xukvyb" />
     <bpmn:sequenceFlow id="Flow_0mp29qt" sourceRef="sid-e2f05670-4e97-417b-ba5c-7d5415e93877" targetRef="Activity_1x6oelm" />
-    <bpmn:userTask id="Activity_1x6oelm" name="Fill survey info">
+    <bpmn:userTask id="Activity_1x6oelm" name="Fill survey info" flowable:assignee="mailine">
       <bpmn:incoming>Flow_0mp29qt</bpmn:incoming>
       <bpmn:outgoing>Flow_1hv6ani</bpmn:outgoing>
     </bpmn:userTask>

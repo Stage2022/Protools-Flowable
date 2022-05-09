@@ -5,6 +5,7 @@ import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -13,6 +14,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.http.HttpClient;
 
+@Component
 public class SurveyReady implements JavaDelegate {
 
     private Logger logger = LoggerFactory.getLogger(SurveyReady.class);

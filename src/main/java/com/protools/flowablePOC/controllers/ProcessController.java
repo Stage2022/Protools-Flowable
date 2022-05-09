@@ -34,8 +34,8 @@ public class ProcessController {
         workflowService.startProcess(processKey);
     }
     @Operation(summary = "Get all task by assignee")
-    @GetMapping(value = "/tasks", produces = MediaType.APPLICATION_JSON_VALUE )
-    public List<TaskRepresentation> getTasks(@RequestParam String assignee) {
+    @GetMapping(value = "/tasks/{assignee}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<TaskRepresentation> getTasks(@PathVariable String assignee) {
         List<Task> tasks = workflowService.getTasks(assignee);
         List<TaskRepresentation> dtos = new ArrayList<TaskRepresentation>();
         for (Task task : tasks) {
@@ -45,8 +45,8 @@ public class ProcessController {
     }
 
     @Operation(summary = "Claim all task by processID")
-    @PostMapping("/get-tasks/{processID}")
-    public void getTasks(@PathVariable String processID, @RequestParam String assignee) {
+    @PostMapping("/get-tasks/{assignee}/{processID}")
+    public void getTasks(@PathVariable String processID, @PathVariable String assignee) {
         logger.info(">>> Claim assigned tasks <<<");
         List<Task> taskInstances = taskService.createTaskQuery().processInstanceId(processID).active().list();
         if (taskInstances.size() > 0) {

@@ -9,6 +9,7 @@ import org.flowable.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URI;
@@ -17,6 +18,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 
+@Component
 public class AddToSurvey implements JavaDelegate {
     private Logger logger = LoggerFactory.getLogger(AddToSurvey.class);
     @Override
