@@ -29,9 +29,9 @@ public class ProcessController {
     private TaskService taskService;
 
     @PostMapping(value= "/start-process/{processKey}")
-    public void startProcessInstance(@PathVariable String processKey){
+    public String startProcessInstance(@PathVariable String processKey){
         logger.info("> POST request to start the process: "+ processKey);
-        workflowService.startProcess(processKey);
+        return (workflowService.startProcess(processKey));
     }
     @Operation(summary = "Get all task by assignee")
     @GetMapping(value = "/tasks/{assignee}", produces = MediaType.APPLICATION_JSON_VALUE)

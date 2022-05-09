@@ -22,17 +22,19 @@ public class WorkflowService {
     private TaskService taskService;
 
     @Transactional
-    public void startProcess(String ProcessKey){
+    public String startProcess(String ProcessKey){
 
         runtimeService.startProcessInstanceByKey(ProcessKey);
         List<ProcessInstance> liste = runtimeService.createProcessInstanceQuery()
                 .processDefinitionKey(ProcessKey)
                 .list();
-        for (org.flowable.engine.runtime.ProcessInstance l : liste){
-            logger.info("Process Instance ID : " + l.getId());
-        }
+        logger.info("Process Instance ID : " + liste.get(0).getId());
+
+        return("Process Instance ID : " + liste.get(0).getId());
+
 
     }
+
 
     @Transactional
     public List<Task> getTasks(String assignee) {
