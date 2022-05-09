@@ -1,0 +1,72 @@
+package com.protools.flowablePOC.services;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.protools.flowablePOC.beans.Person;
+import org.flowable.engine.delegate.DelegateExecution;
+import org.flowable.engine.delegate.JavaDelegate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.HashMap;
+
+public class CreateAccount implements JavaDelegate {
+    private Logger logger = LoggerFactory.getLogger(CreateAccount.class);
+
+    public void execute (DelegateExecution delegateExecution){
+        logger.info("\t >> Create account for unit");
+        HttpClient client = HttpClient.newHttpClient();
+
+        String unit = (String) delegateExecution.getVariable("unit");
+        String surveyID = (String) delegateExecution.getVariable("idSurvey") ;
+        int count = (int) delegateExecution.getVariable("count");
+        logger.info("\t \t >>> Create Account for unit: " + unit + " for survey: "+ surveyID);
+
+        Gson gson = new Gson();
+        Person[] map = gson.fromJson(unit,Person[].class);
+        Person person = map[0];
+        int statusCode = 0;
+
+        var values = new HashMap<String, Object>() {{
+            put("email", person.getEmail());
+            put("nom", person.getNom());
+            put("prenom", person.getPrenom());
+            put("telephone", person.getTelephone());
+            put("id_survey",Long.parseLong(surveyID));
+        }};
+        var objectMapper = new ObjectMapper();
+        String requestBody = null;
+        try {
+            requestBody = objectMapper
+                    .writeValueAsString(values);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        requestBody = "[" + requestBody + "]";
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://annuaire.dev.insee.io/comptes/"+surveyID))
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+        HttpResponse<String> response = null;
+        try {
+            response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        logger.info("\t \t Response Code: " + String.valueOf(response.statusCode()));
+        delegateExecution.setVariable("count", count+1);
+
+    }
+}
