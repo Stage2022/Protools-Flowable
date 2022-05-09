@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1ot73t9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="9.0.3">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:flowable="http://flowable.org/bpmn" id="Definitions_1ot73t9" targetNamespace="http://bpmn.io/schema/bpmn"
+                  exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="9.0.3">
   <bpmn:process id="CasUtilisationPOC" isExecutable="true">
-    <bpmn:serviceTask id="CheckSurveyInfo" name="Check New Survey" implementation="checkSampleSize">
+    <bpmn:serviceTask id="CheckSurveyInfo" name="Check New Survey" flowable:delegateExpression="${checkSampleSize}">
       <bpmn:incoming>Flow_1hv6ani</bpmn:incoming>
       <bpmn:outgoing>Flow_11zmguh</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -13,7 +18,7 @@
         <bpmn:outgoing>Flow_0t98vlv</bpmn:outgoing>
       </bpmn:startEvent>
       <bpmn:sequenceFlow id="Flow_0t98vlv" sourceRef="Event_0g6ye5t" targetRef="Activity_0ug3pz8" />
-      <bpmn:serviceTask id="Activity_0ug3pz8" name="Select Unit" implementation="drawUnit">
+      <bpmn:serviceTask id="Activity_0ug3pz8" name="Select Unit" flowable:delegateExpression="${DrawUnit}">
         <bpmn:incoming>Flow_0t98vlv</bpmn:incoming>
         <bpmn:outgoing>Flow_0x3s1eq</bpmn:outgoing>
       </bpmn:serviceTask>
@@ -24,12 +29,12 @@
         <bpmn:outgoing>Flow_17baz8z</bpmn:outgoing>
         <bpmn:outgoing>Flow_0v75gto</bpmn:outgoing>
       </bpmn:parallelGateway>
-      <bpmn:serviceTask id="Activity_06n7cgg" name="Create Account" implementation="createAccount">
+      <bpmn:serviceTask id="Activity_06n7cgg" name="Create Account" flowable:delegateExpression="${CreateAccount}">
         <bpmn:incoming>Flow_17baz8z</bpmn:incoming>
         <bpmn:outgoing>Flow_130f8tf</bpmn:outgoing>
       </bpmn:serviceTask>
       <bpmn:sequenceFlow id="Flow_0v75gto" sourceRef="Gateway_053s26d" targetRef="Activity_1rfb5zv" />
-      <bpmn:serviceTask id="Activity_1rfb5zv" name="Add to survey" implementation="addToSurvey">
+      <bpmn:serviceTask id="Activity_1rfb5zv" name="Add to survey" flowable:delegateExpression="${AddToSurvey}">
         <bpmn:incoming>Flow_0v75gto</bpmn:incoming>
         <bpmn:outgoing>Flow_0fi4bip</bpmn:outgoing>
       </bpmn:serviceTask>
@@ -45,7 +50,7 @@
       </bpmn:endEvent>
       <bpmn:sequenceFlow id="Flow_0vkdg8s" sourceRef="Gateway_1i70z3j" targetRef="Event_0usmaxh" />
     </bpmn:subProcess>
-    <bpmn:serviceTask id="Activity_12yxcqh" name="Survey setStateReady" implementation="surveyReady">
+    <bpmn:serviceTask id="Activity_12yxcqh" name="Survey setStateReady" flowable:delegateExpression="${SurveyReady}">
       <bpmn:incoming>Flow_0kiuoxx</bpmn:incoming>
       <bpmn:outgoing>Flow_13828zo</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -66,8 +71,8 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_13828zo" sourceRef="Activity_12yxcqh" targetRef="Event_1pfixvm" />
     <bpmn:serviceTask xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-                 xmlns:activiti="http://activiti.org/bpmn" id="saveSurveyInfo" name="saveSurveyInfo"
-                 implementation="saveSurvey" activiti:exclusive="true" activiti:async="true">
+                 xmlns:activiti="http://activiti.org/bpmn" id="saveSurveyInfo" name="SaveSurveyInfo"
+                 flowable:delegateExpression="${saveSurvey}" activiti:exclusive="true" activiti:async="true">
       <incoming>Flow_030lv4j</incoming>
       <outgoing>Flow_0j9p0t5</outgoing>
     </bpmn:serviceTask>
@@ -86,7 +91,7 @@
     <bpmn:sequenceFlow id="Flow_030lv4j" sourceRef="Gateway_0y69ydq" targetRef="saveSurveyInfo">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${surveyValid == true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:serviceTask id="Activity_14b1tdt" name="Abort Process Sample Size" implementation="endProcess">
+    <bpmn:serviceTask id="Activity_14b1tdt" name="Abort Process Sample Size" flowable:delegateExpression="${EndProcess}">
       <bpmn:incoming>Flow_13lrsr1</bpmn:incoming>
       <bpmn:outgoing>Flow_04vgcgq</bpmn:outgoing>
     </bpmn:serviceTask>
