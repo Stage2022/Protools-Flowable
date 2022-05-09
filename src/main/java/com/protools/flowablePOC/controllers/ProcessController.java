@@ -48,34 +48,14 @@ public class ProcessController {
     @PostMapping("/get-tasks/{assignee}/{processID}")
     public void getTasks(@PathVariable String processID, @PathVariable String assignee) {
         logger.info(">>> Claim assigned tasks <<<");
-        List<Task> taskInstances = taskService.createTaskQuery().processInstanceId(processID).active().list();
-        if (taskInstances.size() > 0) {
-            for (Task t : taskInstances) {
-                taskService.addCandidateGroup(t.getId(), "userTeam");
-                logger.info("> Claiming task: " + t.getId());
-                taskService.claim(t.getId(),assignee);
-            }
-        } else {
-            logger.info("\t \t >> There are no task for me to work on.");
-        }
+        workflowService.claimTasks(processID,assignee);
 
     }
 
     @Operation(summary = "Complete claimed task by processKey, add variables to process")
     @GetMapping("/complete-task/{processID}")
     public void completeTaskA(@PathVariable String processID, @RequestBody HashMap<String,Object> variables) {
-        List<Task> taskInstances = taskService.createTaskQuery().processInstanceId(processID).active().list();
-        logger.info("> Completing task from process : " + processID);
-        logger.info("\t > Variables : " + variables.toString());
-        if (taskInstances.size() > 0) {
-            for (Task t : taskInstances) {
-                taskService.addCandidateGroup(t.getId(), "userTeam");
-                logger.info("> Completing task: " + t.getId());
-                taskService.complete(t.getId(),variables);
-                }
-        } else {
-            logger.info("\t \t >> There are no task for me to complete");
-        }
+        workflowService.completeTask(processID,variables);
     }
 
 
