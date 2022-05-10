@@ -2,7 +2,7 @@ package com.protools.flowablePOC.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.activiti.engine.impl.util.json.JSONObject;
+import org.json.JSONObject;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
