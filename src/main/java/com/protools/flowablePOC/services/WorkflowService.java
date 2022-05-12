@@ -57,8 +57,8 @@ public class WorkflowService {
     }
 
     @Transactional
-    public void completeTask(String processID, HashMap<String,Object> variables){
-        List<Task> taskInstances = taskService.createTaskQuery().processInstanceId(processID).active().list();
+    public void completeTask(String processID, HashMap<String,Object> variables, String assignee){
+        List<Task> taskInstances = taskService.createTaskQuery().processInstanceId(processID).taskAssignee(assignee).active().list();
         logger.info("> Completing task from process : " + processID);
         logger.info("\t > Variables : " + variables.toString());
         if (taskInstances.size() > 0) {

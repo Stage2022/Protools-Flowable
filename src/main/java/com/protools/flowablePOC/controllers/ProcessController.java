@@ -53,9 +53,9 @@ public class ProcessController {
     }
 
     @Operation(summary = "Complete claimed task by processKey, add variables to process")
-    @GetMapping("/complete-task/{processID}")
-    public void completeTaskA(@PathVariable String processID, @RequestBody HashMap<String,Object> variables) {
-        workflowService.completeTask(processID,variables);
+    @GetMapping("/complete-task/{assignee}/{processID}")
+    public void completeTaskA(@PathVariable String processID, @RequestBody HashMap<String,Object> variables,String assignee) {
+        workflowService.completeTask(processID,variables,assignee);
     }
 
 
