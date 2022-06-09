@@ -98,6 +98,7 @@
 		</dependency>
 
 
+
 	</dependencies>
 
 	<build>
@@ -114,6 +115,16 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>${project.basedir}/src/test/resources</directory>
+			</testResource>
+		</testResources>
 	</build>
 
 </project>
