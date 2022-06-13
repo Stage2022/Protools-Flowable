@@ -42,7 +42,7 @@ public class WorkflowInfoService {
     public JSONObject getAllProcessInstance(){
         List<ProcessInstance> liste = runtimeService.createProcessInstanceQuery()
                 .list();
-        logger.info("ProcessList: "+ liste.toString());
+
         JSONObject responseDetailsJson = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         for (int i =0; i<liste.size(); i++) {
@@ -61,13 +61,42 @@ public class WorkflowInfoService {
         return responseDetailsJson;
     }
     @Transactional
-    public List<Task> getTasks(String assignee) {
-        return taskService.createTaskQuery().taskAssignee(assignee).list();
+    public JSONArray getTasks(String assignee) {
+        List<Task> response = taskService.createTaskQuery().taskAssignee(assignee).list();
+        JSONArray jsonArray = new JSONArray();
+        for (int i =0; i<response.size(); i++) {
+            JSONObject jsonResponse = new JSONObject();
+            jsonResponse.put("id", response.get(i).getId());
+            jsonResponse.put("name", response.get(i).getName());
+            jsonResponse.put("processInstance", response.get(i).getProcessInstanceId());
+            jsonResponse.put("delegationState", response.get(i).getDelegationState());
+            jsonResponse.put("parentTask",response.get(i).getParentTaskId());
+            jsonResponse.put("createTime",response.get(i).getCreateTime());
+            jsonArray.put(jsonResponse);
+
+        }
+        return jsonArray;
     }
 
     @Transactional
-    public List<Task> getAllTasks() {
-        return taskService.createTaskQuery().list();
+    public JSONArray getAllTasks() {
+        List<Task> response = taskService.createTaskQuery().list();
+        logger.info(response.toString());
+
+        JSONArray jsonArray = new JSONArray();
+        for (int i =0; i<response.size(); i++) {
+            JSONObject jsonResponse = new JSONObject();
+            jsonResponse.put("id", response.get(i).getId());
+            jsonResponse.put("name", response.get(i).getName());
+            jsonResponse.put("processInstance", response.get(i).getProcessInstanceId());
+            jsonResponse.put("delegationState", response.get(i).getDelegationState());
+            jsonResponse.put("parentTask",response.get(i).getParentTaskId());
+            jsonResponse.put("createTime",response.get(i).getCreateTime());
+            jsonArray.put(jsonResponse);
+
+        }
+        return jsonArray;
+
     }
     @Transactional
     public HistoricActivityInstanceQuery getHistory(){

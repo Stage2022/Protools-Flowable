@@ -32,6 +32,7 @@ public class ProcessController {
 
     @Autowired
     private TaskService taskService;
+    @CrossOrigin
     @Operation(summary = "Start process by ProcessKey")
     @PostMapping(value= "/start-process/{processKey}")
     public String startProcessInstance(@PathVariable String processKey){
@@ -40,7 +41,7 @@ public class ProcessController {
         logger.info(String.valueOf(object));
         return (String.valueOf(object));
     }
-
+    @CrossOrigin
     @Operation(summary = "Claim all task by taskID")
     @PostMapping("/get-tasks/{assignee}/{taskID}")
     public void getTasks(@PathVariable String taskID, @PathVariable String assignee) {
@@ -48,7 +49,7 @@ public class ProcessController {
         workflowService.claimTasks(taskID,assignee);
 
     }
-
+    @CrossOrigin
     @Operation(summary = "Complete claimed task by taskID, add variables to process")
     @GetMapping("/complete-task/{assignee}/{taskID}")
     public void completeTaskA(@PathVariable String taskID, @RequestBody HashMap<String,Object> variables, @PathVariable String assignee) {
