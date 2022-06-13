@@ -1,9 +1,13 @@
 package com.protools.flowablePOC.services;
 
+
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
+import org.flowable.engine.history.ProcessInstanceHistoryLogQuery;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class WorkflowService {
@@ -22,8 +27,10 @@ public class WorkflowService {
     @Autowired
     private TaskService taskService;
 
+
+    // Process execution
     @Transactional
-    public String startProcess(String ProcessKey){
+    public JSONObject startProcess(String ProcessKey){
 
         runtimeService.startProcessInstanceByKey(ProcessKey);
         List<ProcessInstance> liste = runtimeService.createProcessInstanceQuery()
@@ -31,20 +38,17 @@ public class WorkflowService {
                 .list();
         logger.info("Process Instance ID : " + liste.get(0).getId());
 
-        return("Process Instance ID : " + liste.get(0).getId());
-
+        JSONObject jsonResponse = new JSONObject();
+        jsonResponse.put("id", liste.get(0).getId());
+        jsonResponse.put("name",liste.get(0).getName());
+        jsonResponse.put("processKey", ProcessKey);
+        jsonResponse.put("startTime", liste.get(0).getStartTime());
+        return(jsonResponse);
 
     }
-
-
     @Transactional
-    public List<Task> getTasks(String assignee) {
-        return taskService.createTaskQuery().taskAssignee(assignee).list();
-    }
-
-    @Transactional
-    public void claimTasks(String processID, String assignee){
-        List<Task> taskInstances = taskService.createTaskQuery().processInstanceId(processID).taskAssignee(assignee).active().list();
+    public void claimTasks(String taskID, String assignee){
+        List<Task> taskInstances = taskService.createTaskQuery().taskId(taskID).taskAssignee(assignee).active().list();
         if (taskInstances.size() > 0) {
             for (Task t : taskInstances) {
                 taskService.addCandidateGroup(t.getId(), "userTeam");
@@ -57,9 +61,9 @@ public class WorkflowService {
     }
 
     @Transactional
-    public void completeTask(String processID, HashMap<String,Object> variables, String assignee){
-        List<Task> taskInstances = taskService.createTaskQuery().processInstanceId(processID).taskAssignee(assignee).active().list();
-        logger.info("> Completing task from process : " + processID);
+    public void completeTask(String taskID, HashMap<String,Object> variables, String assignee){
+        List<Task> taskInstances = taskService.createTaskQuery().taskId(taskID).taskAssignee(assignee).active().list();
+        logger.info("> Completing task from process : " + taskID);
         logger.info("\t > Variables : " + variables.toString());
         if (taskInstances.size() > 0) {
             for (Task t : taskInstances) {

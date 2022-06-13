@@ -1,4 +1,4 @@
-package com.protools.flowablePOC.services;
+package com.protools.flowablePOC.services.CasUsageService;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,26 +19,25 @@ import java.net.http.HttpResponse;
 import java.util.HashMap;
 
 @Component
-public class AddToSurvey implements JavaDelegate {
-    private Logger logger = LoggerFactory.getLogger(AddToSurvey.class);
-    @Override
-    public void execute(DelegateExecution delegateExecution) {
-        logger.info("\t >> Add unit to survey");
+public class CreateAccount implements JavaDelegate {
+    private Logger logger = LoggerFactory.getLogger(CreateAccount.class);
+
+    public void execute (DelegateExecution delegateExecution){
+        logger.info("\t >> Create account for unit");
         HttpClient client = HttpClient.newHttpClient();
-        // Recup variables
+
         String unit = (String) delegateExecution.getVariable("unit");
+
         String surveyID = (String) delegateExecution.getVariable("idSurvey") ;
+        int count = (int) delegateExecution.getVariable("count");
+        logger.info("\t \t >>> Create Account for unit: " + unit + " for survey: "+ surveyID);
 
         Gson gson = new Gson();
-        Person[] map = gson.fromJson(unit, Person[].class);
-
+        Person[] map = gson.fromJson(unit,Person[].class);
         Person person = map[0];
-        logger.info(" \t \t >>> Add unit to survey : " + person.toString());
-
         int statusCode = 0;
-        var id = person.getId();
+
         var values = new HashMap<String, Object>() {{
-            put("id", id);
             put("email", person.getEmail());
             put("nom", person.getNom());
             put("prenom", person.getPrenom());
@@ -55,7 +54,7 @@ public class AddToSurvey implements JavaDelegate {
         }
         requestBody = "[" + requestBody + "]";
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://coleman.dev.insee.io/surveys/"+ surveyID+"/units"))
+                .uri(URI.create("https://annuaire.dev.insee.io/comptes/"+surveyID))
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
@@ -68,7 +67,9 @@ public class AddToSurvey implements JavaDelegate {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        logger.info("\t \t https://coleman.dev.insee.io/persons/"+ id);
+
+        logger.info("\t \t Response Code: " + String.valueOf(response.statusCode()));
+        delegateExecution.setVariable("count", count+1);
 
     }
 }

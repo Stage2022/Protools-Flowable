@@ -1,6 +1,5 @@
-package com.protools.flowablePOC.services;
+package com.protools.flowablePOC.services.CasUsageService;
 
-import com.protools.flowablePOC.beans.Survey;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.http.HttpClient;
 

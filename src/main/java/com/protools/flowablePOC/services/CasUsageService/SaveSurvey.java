@@ -1,4 +1,4 @@
-package com.protools.flowablePOC.services;
+package com.protools.flowablePOC.services.CasUsageService;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
