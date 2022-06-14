@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.flowable.bpmn.model.FlowElement;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
+import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.task.api.history.HistoricTaskInstance;
 import org.json.JSONArray;
@@ -74,6 +75,13 @@ public class ProcessInfoController {
     @GetMapping(value = "/history/task", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<HistoricTaskInstance> getHistoryTask(){
         return(workflowInfoService.getHistoryTask());
+    }
+
+    @CrossOrigin
+    @Operation(summary = "Get Activity History")
+    @GetMapping(value = "/history/activity", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<HistoricActivityInstance> getHistoryActivity(){
+        return(workflowInfoService.getHistoryActivity());
     }
 
 
