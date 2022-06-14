@@ -83,6 +83,23 @@ public class WorkflowInfoService {
     }
 
     @Transactional
+    public JSONArray getTasksProcess(String ProcessID) {
+        List<Task> response = taskService.createTaskQuery().processInstanceId(ProcessID).list();
+        JSONArray jsonArray = new JSONArray();
+        for (int i =0; i<response.size(); i++) {
+            JSONObject jsonResponse = new JSONObject();
+            jsonResponse.put("id", response.get(i).getId());
+            jsonResponse.put("name", response.get(i).getName());
+            jsonResponse.put("processInstance", response.get(i).getProcessInstanceId());
+            jsonResponse.put("delegationState", response.get(i).getDelegationState());
+            jsonResponse.put("parentTask",response.get(i).getParentTaskId());
+            jsonResponse.put("createTime",response.get(i).getCreateTime());
+            jsonArray.put(jsonResponse);
+
+        }
+        return jsonArray;
+    }
+    @Transactional
     public JSONArray getAllTasks() {
         List<Task> response = taskService.createTaskQuery().list();
         logger.info(response.toString());
