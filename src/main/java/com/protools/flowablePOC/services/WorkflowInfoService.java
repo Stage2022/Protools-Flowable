@@ -3,7 +3,7 @@ package com.protools.flowablePOC.services;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.bpmn.model.FlowElement;
 import org.flowable.engine.*;
-import org.flowable.engine.history.HistoricActivityInstanceQuery;
+import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.job.api.Job;
 import org.flowable.job.service.JobService;
@@ -101,8 +101,10 @@ public class WorkflowInfoService {
 
     }
     @Transactional
-    public HistoricActivityInstanceQuery getHistory(){
-        HistoricActivityInstanceQuery response = historyService.createHistoricActivityInstanceQuery();
+    public List<HistoricProcessInstance> getHistory(){
+        List<HistoricProcessInstance> response =historyService.createHistoricProcessInstanceQuery()
+                .finished().listPage(0,10);
+        logger.info(String.valueOf(response));
         return (response);
     };
 
@@ -115,6 +117,7 @@ public class WorkflowInfoService {
         List<Job> jobs = jobService.createJobQuery()
                 .processInstanceId(processInstanceID)
                 .list();
+        logger.info(String.valueOf(jobs));
         for (int i =0; i<jobs.size(); i++) {
             JSONObject jsonResponse = new JSONObject();
             jsonResponse.put("retries", jobs.get(i).getRetries());

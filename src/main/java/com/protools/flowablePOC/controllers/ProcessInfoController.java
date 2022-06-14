@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.flowable.bpmn.model.FlowElement;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
-import org.flowable.engine.history.HistoricActivityInstanceQuery;
+import org.flowable.engine.history.HistoricProcessInstance;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -63,7 +64,7 @@ public class ProcessInfoController {
     @CrossOrigin
     @Operation(summary = "Get History")
     @GetMapping(value = "/history", produces = MediaType.APPLICATION_JSON_VALUE)
-    public HistoricActivityInstanceQuery getHistory(){
+    public List<HistoricProcessInstance> getHistory(){
         return(workflowInfoService.getHistory());
     }
 
