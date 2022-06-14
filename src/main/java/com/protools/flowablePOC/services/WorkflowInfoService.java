@@ -8,6 +8,7 @@ import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.job.api.Job;
 import org.flowable.job.service.JobService;
 import org.flowable.task.api.Task;
+import org.flowable.task.api.history.HistoricTaskInstance;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -101,10 +102,18 @@ public class WorkflowInfoService {
 
     }
     @Transactional
-    public List<HistoricProcessInstance> getHistory(){
+    public List<HistoricProcessInstance> getHistoryProcess(){
         List<HistoricProcessInstance> response =historyService.createHistoricProcessInstanceQuery()
                 .finished().listPage(0,10);
-        logger.info(String.valueOf(response));
+
+        return (response);
+    };
+
+    @Transactional
+    public List<HistoricTaskInstance> getHistoryTask(){
+        List<HistoricTaskInstance> response =historyService.createHistoricTaskInstanceQuery()
+                .finished().listPage(0,10);
+
         return (response);
     };
 

@@ -6,6 +6,7 @@ import org.flowable.bpmn.model.FlowElement;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.history.HistoricProcessInstance;
+import org.flowable.task.api.history.HistoricTaskInstance;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -62,11 +63,19 @@ public class ProcessInfoController {
         return String.valueOf(tasks);
     }
     @CrossOrigin
-    @Operation(summary = "Get History")
-    @GetMapping(value = "/history", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<HistoricProcessInstance> getHistory(){
-        return(workflowInfoService.getHistory());
+    @Operation(summary = "Get Process History")
+    @GetMapping(value = "/history/process", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<HistoricProcessInstance> getHistoryProcess(){
+        return(workflowInfoService.getHistoryProcess());
     }
+
+    @CrossOrigin
+    @Operation(summary = "Get Tasks History")
+    @GetMapping(value = "/history/task", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<HistoricTaskInstance> getHistoryTask(){
+        return(workflowInfoService.getHistoryTask());
+    }
+
 
     @CrossOrigin
     @Operation(summary = "Get error info by process Instance ID")
