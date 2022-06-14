@@ -66,4 +66,12 @@ public class ProcessInfoController {
     public HistoricActivityInstanceQuery getHistory(){
         return(workflowInfoService.getHistory());
     }
+
+    @CrossOrigin
+    @Operation(summary = "Get error info by process Instance ID")
+    @GetMapping(value = "/errors/{processInstanceId}")
+    public String getErrors(@PathVariable String processInstanceId){
+        JSONArray result = workflowInfoService.getJobs(processInstanceId);
+                return String.valueOf(result);
+    }
 }

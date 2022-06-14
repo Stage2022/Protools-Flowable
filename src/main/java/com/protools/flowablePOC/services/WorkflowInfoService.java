@@ -2,12 +2,11 @@ package com.protools.flowablePOC.services;
 
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.bpmn.model.FlowElement;
-import org.flowable.engine.HistoryService;
-import org.flowable.engine.RepositoryService;
-import org.flowable.engine.RuntimeService;
-import org.flowable.engine.TaskService;
+import org.flowable.engine.*;
 import org.flowable.engine.history.HistoricActivityInstanceQuery;
 import org.flowable.engine.runtime.ProcessInstance;
+import org.flowable.job.api.Job;
+import org.flowable.job.service.JobService;
 import org.flowable.task.api.Task;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,6 +32,9 @@ public class WorkflowInfoService {
 
     @Autowired
     private HistoryService historyService;
+
+    @Autowired
+    ProcessEngine processEngine;
     @Transactional
     public Map<String, FlowElement> getBPMNModel(String processDefinitionId){
         BpmnModel response = repositoryService.getBpmnModel(processDefinitionId);
@@ -103,4 +105,23 @@ public class WorkflowInfoService {
         HistoricActivityInstanceQuery response = historyService.createHistoricActivityInstanceQuery();
         return (response);
     };
+
+    @Transactional
+    public JSONArray getJobs(String processInstanceID){
+        JSONArray jsonArray = new JSONArray();
+
+        JobService jobService = processEngine.getProcessEngineConfiguration().getAsyncExecutor().getJobServiceConfiguration().getJobService();
+
+        List<Job> jobs = jobService.createJobQuery()
+                .processInstanceId(processInstanceID)
+                .list();
+        for (int i =0; i<jobs.size(); i++) {
+            JSONObject jsonResponse = new JSONObject();
+            jsonResponse.put("retries", jobs.get(i).getRetries());
+            jsonResponse.put("message",jobs.get(i).getExceptionMessage());
+            jsonArray.put(jsonResponse);
+
+        }
+        return jsonArray;
+    }
 }
