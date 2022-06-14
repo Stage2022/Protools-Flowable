@@ -94,6 +94,7 @@ public class WorkflowInfoService {
             jsonResponse.put("delegationState", response.get(i).getDelegationState());
             jsonResponse.put("parentTask",response.get(i).getParentTaskId());
             jsonResponse.put("createTime",response.get(i).getCreateTime());
+            jsonResponse.put("BPMN_ID", response.get(i).getExecutionId());
             jsonArray.put(jsonResponse);
 
         }
