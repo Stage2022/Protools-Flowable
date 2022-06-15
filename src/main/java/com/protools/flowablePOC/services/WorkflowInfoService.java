@@ -102,6 +102,12 @@ public class WorkflowInfoService {
         }
         return jsonArray;
     }
+
+    @Transactional
+    public String getProcessDefinitionID(String ProcessID){
+        Task response = taskService.createTaskQuery().processInstanceId(ProcessID).singleResult();
+        return response.getProcessDefinitionId();
+    }
     @Transactional
     public JSONArray getAllTasks() {
         List<Task> response = taskService.createTaskQuery().list();
