@@ -39,7 +39,7 @@ public class ProcessInfoController {
     public Map<String, FlowElement> getBPMNInfo(@PathVariable String processID){
         return(workflowInfoService.getBPMNModel(processID));
     }
-    @CrossOrigin
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Operation(summary = "Get all processInstance")
     @GetMapping(value = "/processInstances", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getAllProcessInstance() {
@@ -47,7 +47,7 @@ public class ProcessInfoController {
 
         return (String.valueOf(liste));
        }
-    @CrossOrigin
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Operation(summary = "Get all task by assignee")
     @GetMapping(value = "/tasksAssignee/{assignee}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getTasks(@PathVariable String assignee) {
@@ -56,7 +56,7 @@ public class ProcessInfoController {
         return String.valueOf(tasks);
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Operation(summary = "Get all task by Process ID")
     @GetMapping(value = "/tasksProcessID/{processID}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getTasksProcess(@PathVariable String processID) {
@@ -64,7 +64,7 @@ public class ProcessInfoController {
 
         return String.valueOf(tasks);
     }
-    @CrossOrigin
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Operation(summary = "Get all tasks")
     @GetMapping(value = "/tasks", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getAllTasks() {
@@ -72,21 +72,21 @@ public class ProcessInfoController {
 
         return String.valueOf(tasks);
     }
-    @CrossOrigin
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Operation(summary = "Get Process History")
     @GetMapping(value = "/history/process", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<HistoricProcessInstance> getHistoryProcess(){
         return(workflowInfoService.getHistoryProcess());
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Operation(summary = "Get Tasks History")
     @GetMapping(value = "/history/task", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<HistoricTaskInstance> getHistoryTask(){
         return(workflowInfoService.getHistoryTask());
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Operation(summary = "Get Activity History")
     @GetMapping(value = "/history/activity", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<HistoricActivityInstance> getHistoryActivity(){
@@ -94,7 +94,7 @@ public class ProcessInfoController {
     }
 
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Operation(summary = "Get error info by process Instance ID")
     @GetMapping(value = "/errors/{processInstanceId}")
     public String getErrors(@PathVariable String processInstanceId){
