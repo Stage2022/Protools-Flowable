@@ -33,9 +33,6 @@ public class WorkflowInfoService {
     private RepositoryService repositoryService;
 
     @Autowired
-    private HistoryService historyService;
-
-    @Autowired
     ProcessEngine processEngine;
     @Transactional
     public Map<String, FlowElement> getBPMNModel(String processDefinitionId){
@@ -127,27 +124,6 @@ public class WorkflowInfoService {
         }
         return jsonArray;
 
-    }
-    @Transactional
-    public List<HistoricProcessInstance> getHistoryProcess(){
-        List<HistoricProcessInstance> response = historyService.createHistoricProcessInstanceQuery()
-                .finished().listPage(0,10);
-
-        return (response);
-    };
-
-    @Transactional
-    public List<HistoricTaskInstance> getHistoryTask(){
-        List<HistoricTaskInstance> response = historyService.createHistoricTaskInstanceQuery()
-                .finished().listPage(0,10);
-
-        return (response);
-    };
-
-    @Transactional
-    public List<HistoricActivityInstance> getHistoryActivity(){
-        List<HistoricActivityInstance> response = historyService.createHistoricActivityInstanceQuery().listPage(0,10);
-        return response;
     }
 
     @Transactional

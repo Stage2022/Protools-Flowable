@@ -3,7 +3,6 @@ package com.protools.flowablePOC.services;
 
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
-import org.flowable.engine.history.ProcessInstanceHistoryLogQuery;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.json.JSONArray;
@@ -26,7 +25,6 @@ public class WorkflowService {
 
     @Autowired
     private TaskService taskService;
-
 
     // Process execution
     @Transactional

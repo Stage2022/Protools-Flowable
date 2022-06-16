@@ -79,26 +79,6 @@ public class ProcessInfoController {
 
         return String.valueOf(tasks);
     }
-    @CrossOrigin
-    @Operation(summary = "Get Process History")
-    @GetMapping(value = "/history/process", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<HistoricProcessInstance> getHistoryProcess(){
-        return(workflowInfoService.getHistoryProcess());
-    }
-
-    @CrossOrigin
-    @Operation(summary = "Get Tasks History")
-    @GetMapping(value = "/history/task", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<HistoricTaskInstance> getHistoryTask(){
-        return(workflowInfoService.getHistoryTask());
-    }
-
-    @CrossOrigin
-    @Operation(summary = "Get Activity History")
-    @GetMapping(value = "/history/activity", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<HistoricActivityInstance> getHistoryActivity(){
-        return(workflowInfoService.getHistoryActivity());
-    }
 
 
     @CrossOrigin
