@@ -1,5 +1,6 @@
 package com.protools.flowablePOC.controllers;
 
+import com.protools.flowablePOC.services.HistoryInfoService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.engine.history.HistoricProcessInstance;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController
-public class HistoryInfoService {
+public class HistoryInfoController {
     @Autowired
     private HistoryInfoService historyInfoService;
 

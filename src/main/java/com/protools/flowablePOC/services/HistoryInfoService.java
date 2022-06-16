@@ -20,15 +20,6 @@ public class HistoryInfoService {
     @Autowired
     private HistoryService historyService;
 
-    @Autowired
-    private RuntimeService runtimeService;
-
-    @Autowired
-    private TaskService taskService;
-
-    @Autowired
-    private RepositoryService repositoryService;
-
     @Transactional
     public List<HistoricProcessInstance> getHistoryProcess(){
         List<HistoricProcessInstance> response = historyService.createHistoricProcessInstanceQuery()
