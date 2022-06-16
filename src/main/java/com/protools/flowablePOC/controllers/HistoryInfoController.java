@@ -26,10 +26,10 @@ public class HistoryInfoController {
     }
 
     @CrossOrigin
-    @Operation(summary = "Get Tasks History")
-    @GetMapping(value = "/history/task/{ProcessInstanceID}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<HistoricTaskInstance> getHistoryTask(@PathVariable String ProcessInstanceID){
-        return(historyInfoService.getHistoryTask(ProcessInstanceID));
+    @Operation(summary = "Get Tasks History by ProcessDefinitionID")
+    @GetMapping(value = "/history/task/{ProcessDefinitionID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<HistoricTaskInstance> getHistoryTask(@PathVariable String ProcessDefinitionID){
+        return(historyInfoService.getHistoryTask(ProcessDefinitionID));
     }
 
     @CrossOrigin
