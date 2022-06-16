@@ -19,7 +19,7 @@ public class EventInfoController {
     @CrossOrigin
     @Operation(summary = "Get Events ")
     @GetMapping(value = "/eventDeployments", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<EventDeployment> getHistoryActivity(){
+    public List<EventDeployment> getEventActivity(){
         return(eventInfoService.getEventDeployments());
     }
 
