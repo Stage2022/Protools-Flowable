@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,8 +27,8 @@ public class HistoryInfoController {
 
     @CrossOrigin
     @Operation(summary = "Get Tasks History")
-    @GetMapping(value = "/history/task", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<HistoricTaskInstance> getHistoryTask(String ProcessInstanceID){
+    @GetMapping(value = "/history/task/{ProcessInstanceID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<HistoricTaskInstance> getHistoryTask(@PathVariable String ProcessInstanceID){
         return(historyInfoService.getHistoryTask(ProcessInstanceID));
     }
 
