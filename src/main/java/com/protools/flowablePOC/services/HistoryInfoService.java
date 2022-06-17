@@ -31,7 +31,7 @@ public class HistoryInfoService {
     @Transactional
     public List<HistoricTaskInstance> getHistoryTask(String processDefinitionID){
         List<HistoricTaskInstance> response = historyService.createHistoricTaskInstanceQuery()
-                .unfinished().processDefinitionId(processDefinitionID).listPage(0,10);
+                .processDefinitionId(processDefinitionID).listPage(0,10);
 
         return (response);
     };
