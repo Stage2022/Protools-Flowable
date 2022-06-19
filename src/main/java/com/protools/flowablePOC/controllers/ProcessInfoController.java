@@ -88,4 +88,12 @@ public class ProcessInfoController {
         JSONArray result = workflowInfoService.getJobs(processInstanceId);
                 return String.valueOf(result);
     }
+
+    @CrossOrigin
+    @Operation(summary = "Get Process Variables by Process Instance ID")
+    @GetMapping(value = "/variables/{processInstanceId}")
+    public String getVariables(@PathVariable String processInstanceId){
+        Map<String,Object> result = workflowInfoService.getProcessVariables(processInstanceId);
+        return String.valueOf(result);
+    }
 }

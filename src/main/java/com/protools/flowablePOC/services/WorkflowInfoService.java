@@ -3,13 +3,10 @@ package com.protools.flowablePOC.services;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.bpmn.model.FlowElement;
 import org.flowable.engine.*;
-import org.flowable.engine.history.HistoricActivityInstance;
-import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.job.api.Job;
 import org.flowable.job.service.JobService;
 import org.flowable.task.api.Task;
-import org.flowable.task.api.history.HistoricTaskInstance;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -144,5 +141,12 @@ public class WorkflowInfoService {
 
         }
         return jsonArray;
+    }
+
+    @Transactional
+    public Map<String, Object> getProcessVariables(String ProcessInstanceID){
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().includeProcessVariables().processInstanceId(ProcessInstanceID).singleResult();
+        Map<String,Object> variables = processInstance.getProcessVariables();
+        return variables;
     }
 }
