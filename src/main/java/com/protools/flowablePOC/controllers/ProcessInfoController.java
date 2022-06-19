@@ -94,6 +94,7 @@ public class ProcessInfoController {
     @GetMapping(value = "/variables/{processInstanceId}")
     public String getVariables(@PathVariable String processInstanceId){
         Map<String,Object> result = workflowInfoService.getProcessVariables(processInstanceId);
-        return String.valueOf(result);
+        JSONObject json = new JSONObject(result);
+        return String.valueOf(json);
     }
 }
