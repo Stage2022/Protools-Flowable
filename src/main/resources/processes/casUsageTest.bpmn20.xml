@@ -3,9 +3,9 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
                   xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
-                  xmlns:flowable="http://flowable.org/bpmn" id="Definitions_1ot73t9" targetNamespace="http://bpmn.io/schema/bpmn"
+                  xmlns:flowable="http://flowable.org/bpmn" id="Definitions_1ot73t9" targetNamespace="http://flowable.org/bpmn20"
                   exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="9.0.3">
-  <bpmn:process id="CasUtilisationPOC" isExecutable="true">
+  <bpmn:process id="CasUtilisationPOC" isExecutable="true" name = "Cas d'utilisation simple pour un POC Protools">
     <bpmn:serviceTask id="CheckSurveyInfo" name="Check New Survey" flowable:delegateExpression="${checkSampleSize}" >
       <documentation>
         Vérifie la taille de l'échantillon, un échantillon est désigné comme valide s'il contient plus de 5 unités d'enquête
