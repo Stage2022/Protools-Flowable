@@ -49,8 +49,9 @@ public class WorkflowInfoService {
 
         JSONObject responseDetailsJson = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        logger.info("liste : "+ liste);
+
         for (int i =0; i<liste.size(); i++) {
+            logger.info("liste : "+ liste.get(i));
             JSONObject jsonResponse = new JSONObject();
             jsonResponse.put("id", liste.get(i).getId());
             jsonResponse.put("name", liste.get(i).getName());
