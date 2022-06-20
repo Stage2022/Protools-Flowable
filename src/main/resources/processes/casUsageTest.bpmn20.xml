@@ -7,9 +7,9 @@
                   exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="9.0.3">
   <bpmn:process id="CasUtilisationPOC" isExecutable="true" name = "Cas d'utilisation simple pour un POC Protools">
     <bpmn:serviceTask id="CheckSurveyInfo" name="Check New Survey" flowable:delegateExpression="${checkSampleSize}" >
-      <documentation>
+      <bpmn:documentation>
         Vérifie la taille de l'échantillon, un échantillon est désigné comme valide s'il contient plus de 5 unités d'enquête
-      </documentation>
+      </bpmn:documentation>
       <bpmn:incoming>Flow_1hv6ani</bpmn:incoming>
       <bpmn:outgoing>Flow_11zmguh</bpmn:outgoing>
     </bpmn:serviceTask>
