@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.flowable.bpmn.model.FlowElement;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
-import org.flowable.engine.runtime.ProcessInstance;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -54,10 +52,10 @@ public class ProcessInfoController {
     @CrossOrigin
     @Operation(summary = "Get all processInstance")
     @GetMapping(value = "/processInstances", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getAllProcessInstance() {
-        List<ProcessInstance> liste = workflowInfoService.getAllProcessInstance();
-        JSONObject json = new JSONObject(liste);
-        return (String.valueOf(liste));
+    public JSONObject getAllProcessInstance() {
+        JSONObject liste = workflowInfoService.getAllProcessInstance();
+
+        return (liste);
        }
     @CrossOrigin
     @Operation(summary = "Get all task by assignee")
