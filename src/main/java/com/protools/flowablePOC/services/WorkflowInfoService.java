@@ -40,6 +40,7 @@ public class WorkflowInfoService {
     @Transactional
     public String getBPMNModelDocumentation(String processDefinitionId){
         BpmnModel response = repositoryService.getBpmnModel(processDefinitionId);
+
         return (response.getMainProcess().getDocumentation());
     };
     @Transactional
@@ -51,15 +52,16 @@ public class WorkflowInfoService {
         JSONArray jsonArray = new JSONArray();
 
         for (int i =0; i<liste.size(); i++) {
-            logger.info("liste : "+ liste.get(i));
+            logger.info("name : "+ liste.get(i).getName());
             JSONObject jsonResponse = new JSONObject();
             jsonResponse.put("id", liste.get(i).getId());
             jsonResponse.put("name", liste.get(i).getName());
             jsonResponse.put("processKey", liste.get(i).getProcessDefinitionKey());
             jsonResponse.put("activity", liste.get(i).getActivityId());
             jsonResponse.put("startTime",liste.get(i).getStartTime());
-            jsonResponse.put("tenant",liste.get(i).getTenantId());
             jsonResponse.put("ProcessDefinitionId",liste.get(i).getProcessDefinitionId());
+            jsonResponse.put("description", liste.get(i).getDescription());
+            jsonResponse.put("businessStatus", liste.get(i).getBusinessStatus());
             jsonArray.put(jsonResponse);
 
         }

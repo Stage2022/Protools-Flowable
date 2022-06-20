@@ -19,7 +19,9 @@ public class SurveyReady implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) {
         HttpClient client = HttpClient.newHttpClient();
+        logger.info("surveyID: " + delegateExecution.getVariable("idSurvey"));
         String surveyID = (String) delegateExecution.getVariable("idSurvey") ;
+
         URL url = null;
         try {
             url = new URL("https://coleman.dev.insee.io/survey/"+ String.valueOf(surveyID)+ "/ready");

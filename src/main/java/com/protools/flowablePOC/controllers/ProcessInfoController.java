@@ -5,9 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.flowable.bpmn.model.FlowElement;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
-import org.flowable.engine.history.HistoricActivityInstance;
-import org.flowable.engine.history.HistoricProcessInstance;
-import org.flowable.task.api.history.HistoricTaskInstance;
+import org.flowable.engine.runtime.ProcessInstance;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -57,8 +55,8 @@ public class ProcessInfoController {
     @Operation(summary = "Get all processInstance")
     @GetMapping(value = "/processInstances", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getAllProcessInstance() {
-        JSONObject liste = workflowInfoService.getAllProcessInstance();
-
+        List<ProcessInstance> liste = workflowInfoService.getAllProcessInstance();
+        JSONObject json = new JSONObject(liste);
         return (String.valueOf(liste));
        }
     @CrossOrigin
