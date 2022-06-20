@@ -52,11 +52,11 @@ public class ProcessInfoController {
     @CrossOrigin
     @Operation(summary = "Get all processInstance")
     @GetMapping(value = "/processInstances", produces = MediaType.APPLICATION_JSON_VALUE)
-    public JSONObject getAllProcessInstance() {
+    public String getAllProcessInstance() {
         JSONObject liste = workflowInfoService.getAllProcessInstance();
 
-        return (liste);
-       }
+        return (String.valueOf(liste));
+    }
     @CrossOrigin
     @Operation(summary = "Get all task by assignee")
     @GetMapping(value = "/tasksAssignee/{assignee}", produces = MediaType.APPLICATION_JSON_VALUE)

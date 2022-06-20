@@ -47,12 +47,9 @@ public class WorkflowInfoService {
     public JSONObject getAllProcessInstance(){
         List<ProcessInstance> liste = runtimeService.createProcessInstanceQuery()
                 .list();
-
         JSONObject responseDetailsJson = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-
         for (int i =0; i<liste.size(); i++) {
-            logger.info("name : "+ liste.get(i).getName());
             JSONObject jsonResponse = new JSONObject();
             jsonResponse.put("id", liste.get(i).getId());
             jsonResponse.put("name", liste.get(i).getName());
