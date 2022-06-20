@@ -21,7 +21,7 @@
         <bpmn:outgoing>Flow_0t98vlv</bpmn:outgoing>
       </bpmn:startEvent>
       <bpmn:sequenceFlow id="Flow_0t98vlv" sourceRef="Event_0g6ye5t" targetRef="Activity_0ug3pz8" />
-      <bpmn:serviceTask id="Activity_0ug3pz8" name="Select Unit" flowable:delegateExpression="${drawUnit}">
+      <bpmn:serviceTask id="Activity_0ug3pz8" name="Select Unit" flowable:delegateExpression="${drawUnit}" b>
         <bpmn:documentation>
           Tire une unité d'enquête dans une base de donnée d'unités
         </bpmn:documentation>

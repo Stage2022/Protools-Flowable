@@ -36,6 +36,12 @@ public class WorkflowInfoService {
         BpmnModel response = repositoryService.getBpmnModel(processDefinitionId);
         return (response.getMainProcess().getFlowElementMap());
     };
+
+    @Transactional
+    public String getBPMNModelDocumentation(String processDefinitionId){
+        BpmnModel response = repositoryService.getBpmnModel(processDefinitionId);
+        return (response.getMainProcess().getDocumentation());
+    };
     @Transactional
     public JSONObject getAllProcessInstance(){
         List<ProcessInstance> liste = runtimeService.createProcessInstanceQuery()

@@ -41,6 +41,13 @@ public class ProcessInfoController {
     }
 
     @CrossOrigin
+    @Operation(summary = "Get BPMN documentation by process")
+    @GetMapping(value = "/documentation/{processID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getBPMNModelDocumentation(@PathVariable String processID){
+        return(workflowInfoService.getBPMNModelDocumentation(processID));
+    }
+
+    @CrossOrigin
     @Operation(summary = "Get ProcessDefinitionID (temporary endpoint)")
     @GetMapping(value = "/processDefinition/{processID}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getProcessDefinitionID(@PathVariable String processID){
