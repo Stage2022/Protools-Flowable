@@ -67,10 +67,10 @@ public class ProcessInfoController {
     }
 
     @CrossOrigin
-    @Operation(summary = "Get all task by Process ID")
-    @GetMapping(value = "/tasksProcessID/{processID}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getTasksProcess(@PathVariable String processID) {
-        JSONArray tasks = workflowInfoService.getTasksProcess(processID);
+    @Operation(summary = "Get all task by Task ID")
+    @GetMapping(value = "/tasksProcessID/{taskID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getTasksProcess(@PathVariable String taskID) {
+        JSONArray tasks = workflowInfoService.getTasksProcess(taskID);
 
         return String.valueOf(tasks);
     }
