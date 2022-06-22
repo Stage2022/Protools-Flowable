@@ -1,8 +1,7 @@
 package com.protools.flowablePOC.services;
 
 
-import org.flowable.engine.RuntimeService;
-import org.flowable.engine.TaskService;
+import org.flowable.engine.*;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.json.JSONArray;
@@ -43,19 +42,6 @@ public class WorkflowService {
         jsonResponse.put("startTime", liste.get(0).getStartTime());
         return(jsonResponse);
 
-    }
-    @Transactional
-    public void claimTasks(String taskID, String assignee){
-        List<Task> taskInstances = taskService.createTaskQuery().taskId(taskID).taskAssignee(assignee).active().list();
-        if (taskInstances.size() > 0) {
-            for (Task t : taskInstances) {
-                taskService.addCandidateGroup(t.getId(), "userTeam");
-                logger.info("> Claiming task: " + t.getId());
-                taskService.claim(t.getId(),assignee);
-            }
-        } else {
-            logger.info("\t \t >> There are no task for me to work on.");
-        }
     }
 
     @Transactional

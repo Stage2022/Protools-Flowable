@@ -2,6 +2,7 @@ package com.protools.flowablePOC.controllers;
 
 import com.google.gson.Gson;
 import com.protools.flowablePOC.beans.TaskRepresentation;
+import com.protools.flowablePOC.services.WorkflowInfoService;
 import com.protools.flowablePOC.services.WorkflowService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.flowable.bpmn.model.Artifact;
@@ -24,6 +25,9 @@ public class ProcessController {
     private WorkflowService workflowService;
 
     @Autowired
+    private WorkflowInfoService workflowInfoService;
+
+    @Autowired
     private RuntimeService runtimeService;
 
     @Autowired
@@ -32,17 +36,18 @@ public class ProcessController {
     @Operation(summary = "Start process by ProcessKey")
     @PostMapping(value= "/start-process/{processKey}")
     public String startProcessInstance(@PathVariable String processKey){
-        logger.info("> POST request to start the process: "+ processKey);
+        logger.info("> Start the process: "+ processKey);
         JSONObject object = workflowService.startProcess(processKey);
         logger.info(String.valueOf(object));
         return (String.valueOf(object));
     }
     @CrossOrigin
-    @Operation(summary = "Claim all task by taskID")
-    @PostMapping("/get-tasks/{assignee}/{taskID}")
-    public void getTasks(@PathVariable String taskID, @PathVariable String assignee) {
+    @Operation(summary = "Claim all task by processInstanceID")
+    @PostMapping("/get-tasks/{assignee}/{processInstanceID}")
+    public void getTasks(@PathVariable String processInstanceID, @PathVariable String assignee) {
         logger.info(">>> Claim assigned tasks for assignee "+ assignee+" <<<");
-        workflowService.claimTasks(taskID,assignee);
+        logger.info("processInstanceID : "+processInstanceID);
+        workflowInfoService.claimTasks(processInstanceID,assignee);
 
     }
     @CrossOrigin
@@ -50,6 +55,7 @@ public class ProcessController {
     @GetMapping("/complete-task/{assignee}/{taskID}")
     public void completeTaskA(@PathVariable String taskID, @RequestBody HashMap<String,Object> variables, @PathVariable String assignee) {
         logger.info(">>> Complete assigned task for assignee "+ assignee +" <<<");
+        logger.info("TaskID : "+taskID);
         workflowService.completeTask(taskID,variables,assignee);
     }
 

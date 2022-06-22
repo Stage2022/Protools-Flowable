@@ -74,7 +74,7 @@ public class WorkflowInfoService {
         JSONArray jsonArray = new JSONArray();
         for (int i =0; i<response.size(); i++) {
             JSONObject jsonResponse = new JSONObject();
-            jsonResponse.put("id", response.get(i).getId());
+            jsonResponse.put("TaskId", response.get(i).getId());
             jsonResponse.put("name", response.get(i).getName());
             jsonResponse.put("processInstance", response.get(i).getProcessInstanceId());
             jsonResponse.put("delegationState", response.get(i).getDelegationState());
@@ -87,13 +87,27 @@ public class WorkflowInfoService {
         return jsonArray;
     }
 
+    //Temporary
+    @Transactional
+    public void claimTasks(String processInstanceID, String assignee){
+        List<Task> response = taskService.createTaskQuery().processInstanceId(processInstanceID).list();
+        logger.info(response.toString());
+        for (int i =0; i<response.size(); i++) {
+            taskService.addCandidateGroup(response.get(i).getId(), "userTeam");
+            logger.info("> Claiming task: " + response.get(i).getId());
+            taskService.claim(response.get(i).getId(),assignee);
+        }
+
+    }
+
     @Transactional
     public JSONArray getTasksProcess(String ProcessID) {
         List<Task> response = taskService.createTaskQuery().processInstanceId(ProcessID).list();
+        logger.info(response.toString());
         JSONArray jsonArray = new JSONArray();
         for (int i =0; i<response.size(); i++) {
             JSONObject jsonResponse = new JSONObject();
-            jsonResponse.put("id", response.get(i).getId());
+            jsonResponse.put("TaskId", response.get(i).getId());
             jsonResponse.put("name", response.get(i).getName());
             jsonResponse.put("processInstance", response.get(i).getProcessInstanceId());
             jsonResponse.put("delegationState", response.get(i).getDelegationState());
@@ -120,7 +134,7 @@ public class WorkflowInfoService {
         JSONArray jsonArray = new JSONArray();
         for (int i =0; i<response.size(); i++) {
             JSONObject jsonResponse = new JSONObject();
-            jsonResponse.put("id", response.get(i).getId());
+            jsonResponse.put("TaskId", response.get(i).getId());
             jsonResponse.put("name", response.get(i).getName());
             jsonResponse.put("processInstance", response.get(i).getProcessInstanceId());
             jsonResponse.put("delegationState", response.get(i).getDelegationState());
