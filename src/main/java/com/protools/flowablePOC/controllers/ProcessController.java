@@ -24,14 +24,6 @@ public class ProcessController {
     @Autowired
     private WorkflowService workflowService;
 
-    @Autowired
-    private WorkflowInfoService workflowInfoService;
-
-    @Autowired
-    private RuntimeService runtimeService;
-
-    @Autowired
-    private TaskService taskService;
     @CrossOrigin
     @Operation(summary = "Start process by ProcessKey")
     @PostMapping(value= "/start-process/{processKey}")
@@ -47,7 +39,7 @@ public class ProcessController {
     public void getTasks(@PathVariable String processInstanceID, @PathVariable String assignee) {
         logger.info(">>> Claim assigned tasks for assignee "+ assignee+" <<<");
         logger.info("processInstanceID : "+processInstanceID);
-        workflowInfoService.claimTasks(processInstanceID,assignee);
+        workflowService.claimTasks(processInstanceID,assignee);
 
     }
     @CrossOrigin

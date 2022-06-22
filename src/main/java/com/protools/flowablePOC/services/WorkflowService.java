@@ -45,6 +45,20 @@ public class WorkflowService {
     }
 
     @Transactional
+    public void claimTasks(String taskID, String assignee){
+        List<Task> taskInstances = taskService.createTaskQuery().taskId(taskID).taskAssignee(assignee).active().list();
+        if (taskInstances.size() > 0) {
+            for (Task t : taskInstances) {
+                taskService.addCandidateGroup(t.getId(), "userTeam");
+                logger.info("> Claiming task: " + t.getId());
+                taskService.claim(t.getId(),assignee);
+            }
+        } else {
+            logger.info("\t \t >> No task found.");
+        }
+    }
+
+    @Transactional
     public void completeTask(String taskID, HashMap<String,Object> variables, String assignee){
         List<Task> taskInstances = taskService.createTaskQuery().taskId(taskID).taskAssignee(assignee).active().list();
         logger.info("> Completing task from process : " + taskID);

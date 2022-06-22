@@ -87,24 +87,9 @@ public class WorkflowInfoService {
         return jsonArray;
     }
 
-    //Temporary
-    @Transactional
-    public void claimTasks(String processInstanceID, String assignee){
-        JSONArray response = getTasksProcess(processInstanceID);
-        logger.info(response.toString());
-        for (int i =0; i<response.length(); i++) {
-            JSONObject object = response.getJSONObject(i);
-            taskService.addCandidateGroup(object.getString("TaskId"), "userTeam");
-            logger.info("> Claiming task: " + object.getString("TaskId"));
-            taskService.claim(object.getString("TaskId"),assignee);
-        }
-
-    }
-
     @Transactional
     public JSONArray getTasksProcess(String ProcessID) {
         List<Task> response = taskService.createTaskQuery().processInstanceId(ProcessID).list();
-        logger.info(response.toString());
         JSONArray jsonArray = new JSONArray();
         for (int i =0; i<response.size(); i++) {
             JSONObject jsonResponse = new JSONObject();
