@@ -34,12 +34,11 @@ public class ProcessController {
         return (String.valueOf(object));
     }
     @CrossOrigin
-    @Operation(summary = "Claim all task by processInstanceID")
-    @PostMapping("/get-tasks/{assignee}/{processInstanceID}")
-    public void getTasks(@PathVariable String processInstanceID, @PathVariable String assignee) {
+    @Operation(summary = "Claim all task by TaskID")
+    @PostMapping("/get-tasks/{assignee}/{TaskID}")
+    public void getTasks(@PathVariable String TaskID, @PathVariable String assignee) {
         logger.info(">>> Claim assigned tasks for assignee "+ assignee+" <<<");
-        logger.info("processInstanceID : "+processInstanceID);
-        workflowService.claimTasks(processInstanceID,assignee);
+        workflowService.claimTasks(TaskID,assignee);
 
     }
     @CrossOrigin
