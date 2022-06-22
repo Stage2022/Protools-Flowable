@@ -41,7 +41,7 @@ public class ProcessController {
     @Operation(summary = "Claim all task by taskID")
     @PostMapping("/get-tasks/{assignee}/{taskID}")
     public void getTasks(@PathVariable String taskID, @PathVariable String assignee) {
-        logger.info(">>> Claim assigned tasks <<<");
+        logger.info(">>> Claim assigned tasks for assignee "+ assignee+" <<<");
         workflowService.claimTasks(taskID,assignee);
 
     }
@@ -49,7 +49,7 @@ public class ProcessController {
     @Operation(summary = "Complete claimed task by taskID, add variables to process")
     @GetMapping("/complete-task/{assignee}/{taskID}")
     public void completeTaskA(@PathVariable String taskID, @RequestBody HashMap<String,Object> variables, @PathVariable String assignee) {
-        logger.info(">>> Complete assigned task for assignee + "+ assignee +" <<<");
+        logger.info(">>> Complete assigned task for assignee "+ assignee +" <<<");
         workflowService.completeTask(taskID,variables,assignee);
     }
 

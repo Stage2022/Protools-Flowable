@@ -62,17 +62,11 @@
       </timerEventDefinition>
     </intermediateCatchEvent>
     <sequenceFlow id="Flow_0mp29qt" sourceRef="StartEvent_1" targetRef="Activity_1x6oelm"></sequenceFlow>
-    <userTask id="Activity_1x6oelm" name="Fill survey info" flowable:assignee="mailine" flowable:formFieldValidation="true">
+    <userTask id="Activity_1x6oelm" name="Fill survey info" flowable:assignee="user" flowable:formFieldValidation="true">
       <documentation>Demande à l'utilisateur le nom de l'enquête, la taille de l'échantillon, la date de début et de fin</documentation>
-      <extensionElements>
-        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
-      </extensionElements>
     </userTask>
-    <userTask id="CheckFinalState" name="Check Final State" flowable:assignee="mailine" flowable:formFieldValidation="true">
+    <userTask id="CheckFinalState" name="Check Final State" flowable:assignee="user" flowable:formFieldValidation="true">
       <documentation>Visualisation de l'état final du processus avant validation</documentation>
-      <extensionElements>
-        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
-      </extensionElements>
     </userTask>
     <sequenceFlow id="sid-D10DB926-2EBE-448D-8AC8-24D8D8A4E7DA" sourceRef="Gateway_0ptspxv" targetRef="CheckFinalState"></sequenceFlow>
     <sequenceFlow id="sid-B59A5914-F7DB-4A2C-B74A-C03D9E01B86A" sourceRef="CheckFinalState" targetRef="Activity_12yxcqh"></sequenceFlow>
