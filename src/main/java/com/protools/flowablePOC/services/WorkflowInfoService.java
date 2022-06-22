@@ -90,12 +90,13 @@ public class WorkflowInfoService {
     //Temporary
     @Transactional
     public void claimTasks(String processInstanceID, String assignee){
-        List<Task> response = taskService.createTaskQuery().processInstanceId(processInstanceID).list();
+        JSONArray response = getTasksProcess(processInstanceID);
         logger.info(response.toString());
-        for (int i =0; i<response.size(); i++) {
-            taskService.addCandidateGroup(response.get(i).getId(), "userTeam");
-            logger.info("> Claiming task: " + response.get(i).getId());
-            taskService.claim(response.get(i).getId(),assignee);
+        for (int i =0; i<response.length(); i++) {
+            JSONObject object = response.getJSONObject(i);
+            taskService.addCandidateGroup(object.getString("TaskId"), "userTeam");
+            logger.info("> Claiming task: " + object.getString("TaskId"));
+            taskService.claim(object.getString("TaskId"),assignee);
         }
 
     }
