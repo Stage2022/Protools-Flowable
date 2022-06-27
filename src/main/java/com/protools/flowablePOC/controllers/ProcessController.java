@@ -5,11 +5,6 @@ import com.protools.flowablePOC.beans.TaskRepresentation;
 import com.protools.flowablePOC.services.WorkflowInfoService;
 import com.protools.flowablePOC.services.WorkflowService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.flowable.bpmn.model.Artifact;
-import org.flowable.engine.RuntimeService;
-import org.flowable.engine.TaskService;
-import org.flowable.engine.runtime.ProcessInstance;
-import org.flowable.task.api.Task;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +38,7 @@ public class ProcessController {
     }
     @CrossOrigin
     @Operation(summary = "Complete claimed task by taskID, add variables to process")
-    @GetMapping("/complete-task/{assignee}/{taskID}")
+    @PostMapping("/complete-task/{assignee}/{taskID}")
     public void completeTaskA(@PathVariable String taskID, @RequestBody HashMap<String,Object> variables, @PathVariable String assignee) {
         logger.info(">>> Complete assigned task for assignee "+ assignee +" <<<");
         logger.info("TaskID : "+taskID);
