@@ -109,13 +109,12 @@ public class WorkflowInfoService {
 
     @Transactional
     public String getProcessDefinitionID(String ProcessID){
-        Task response = taskService.createTaskQuery().processInstanceId(ProcessID).singleResult();
+        ProcessInstance response = runtimeService.createProcessInstanceQuery().processInstanceId(ProcessID).singleResult();
         return response.getProcessDefinitionId();
     }
     @Transactional
     public JSONArray getAllTasks() {
         List<Task> response = taskService.createTaskQuery().list();
-        logger.info(response.toString());
 
         JSONArray jsonArray = new JSONArray();
         for (int i =0; i<response.size(); i++) {
@@ -142,7 +141,7 @@ public class WorkflowInfoService {
         List<Job> jobs = jobService.createJobQuery()
                 .processInstanceId(processInstanceID)
                 .list();
-        logger.info(String.valueOf(jobs));
+
         for (int i =0; i<jobs.size(); i++) {
             JSONObject jsonResponse = new JSONObject();
             jsonResponse.put("retries", jobs.get(i).getRetries());
