@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -99,5 +100,13 @@ public class ProcessInfoController {
         Map<String,Object> result = workflowInfoService.getProcessVariables(processInstanceId);
         JSONObject json = new JSONObject(result);
         return String.valueOf(json);
+    }
+
+    @CrossOrigin
+    @Operation(summary = "Get activity ID (BPMN file) from process Instance ID")
+    @GetMapping(value = "executionActivities/{processInstanceId}")
+    public List<String> getActivityIdExecution(@PathVariable String processInstanceId){
+        List<String> result = workflowInfoService.getActivityExecution(processInstanceId);
+        return result;
     }
 }

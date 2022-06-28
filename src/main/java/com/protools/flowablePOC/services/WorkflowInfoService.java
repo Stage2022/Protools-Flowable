@@ -3,6 +3,7 @@ package com.protools.flowablePOC.services;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.bpmn.model.FlowElement;
 import org.flowable.engine.*;
+import org.flowable.engine.runtime.Execution;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.job.api.Job;
 import org.flowable.job.service.JobService;
@@ -17,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 public class WorkflowInfoService {
     private Logger logger = LoggerFactory.getLogger(WorkflowInfoService.class);
@@ -157,5 +160,13 @@ public class WorkflowInfoService {
         ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().includeProcessVariables().processInstanceId(ProcessInstanceID).singleResult();
         Map<String,Object> variables = processInstance.getProcessVariables();
         return variables;
+    }
+
+    @Transactional
+    public List<String> getActivityExecution(String ProcessInstanceID){
+        List<Execution> executions = runtimeService.createExecutionQuery().onlyChildExecutions().processInstanceId(ProcessInstanceID).list();
+        List<String> activityIds = executions.stream().map(Execution::getActivityId).collect(Collectors.toList());
+        return activityIds;
+
     }
 }
