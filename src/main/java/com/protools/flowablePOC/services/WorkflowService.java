@@ -3,6 +3,7 @@ package com.protools.flowablePOC.services;
 
 import org.flowable.engine.*;
 import org.flowable.engine.runtime.ProcessInstance;
+import org.flowable.engine.runtime.ProcessInstanceBuilder;
 import org.flowable.task.api.Task;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,13 +29,15 @@ public class WorkflowService {
     // Process execution and setBusinessKey
     @Transactional
     public JSONObject startProcess(String ProcessKey, String BusinessKey){
-
-        runtimeService.startProcessInstanceByKey(ProcessKey);
+        ProcessInstanceBuilder processInstanceBuilder = runtimeService.createProcessInstanceBuilder();
+        processInstanceBuilder.businessKey(BusinessKey).processDefinitionKey(ProcessKey).start();
+        //runtimeService.startProcessInstanceByKey(ProcessKey);
         List<ProcessInstance> liste = runtimeService.createProcessInstanceQuery()
                 .processDefinitionKey(ProcessKey)
                 .list();
         logger.info("Process Instance ID : " + liste.get(0).getId());
-        runtimeService.updateBusinessKey(liste.get(0).getId(), BusinessKey);
+        logger.info("Added businessKey to the process "+ liste.get(0).getBusinessKey() );
+
 
         JSONObject jsonResponse = new JSONObject();
         jsonResponse.put("id", liste.get(0).getId());
