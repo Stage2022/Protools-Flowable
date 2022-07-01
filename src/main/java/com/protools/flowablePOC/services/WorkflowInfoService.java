@@ -1,6 +1,7 @@
 package com.protools.flowablePOC.services;
 
 import org.flowable.bpmn.model.BpmnModel;
+import org.flowable.bpmn.model.ExtensionElement;
 import org.flowable.bpmn.model.FlowElement;
 import org.flowable.engine.*;
 import org.flowable.engine.runtime.Execution;
@@ -38,6 +39,12 @@ public class WorkflowInfoService {
     public Map<String, FlowElement> getBPMNModel(String processDefinitionId){
         BpmnModel response = repositoryService.getBpmnModel(processDefinitionId);
         return (response.getMainProcess().getFlowElementMap());
+    };
+
+    @Transactional
+    public Map<String, List<ExtensionElement>> getExtension(String processDefinitionId){
+        BpmnModel response = repositoryService.getBpmnModel(processDefinitionId);
+        return (response.getMainProcess().getExtensionElements());
     };
 
     @Transactional
@@ -128,6 +135,7 @@ public class WorkflowInfoService {
             jsonResponse.put("delegationState", response.get(i).getDelegationState());
             jsonResponse.put("parentTask",response.get(i).getParentTaskId());
             jsonResponse.put("createTime",response.get(i).getCreateTime());
+            jsonResponse.put("extensionID", response.get(i).getExecutionId());
             jsonArray.put(jsonResponse);
 
         }

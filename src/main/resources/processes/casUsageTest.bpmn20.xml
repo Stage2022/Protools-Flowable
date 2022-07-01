@@ -62,10 +62,10 @@
       </timerEventDefinition>
     </intermediateCatchEvent>
     <sequenceFlow id="Flow_0mp29qt" sourceRef="StartEvent_1" targetRef="Activity_1x6oelm"></sequenceFlow>
-    <userTask id="Activity_1x6oelm" name="Fill survey info" flowable:assignee="user" flowable:formFieldValidation="true">
+    <userTask id="Activity_1x6oelm" name="Fill survey info" flowable:assignee="user" flowable:formFieldValidation="true" flowable:extensionId="DemandeInfo">
       <documentation>Demande à l'utilisateur le nom de l'enquête, la taille de l'échantillon, la date de début et de fin</documentation>
     </userTask>
-    <userTask id="CheckFinalState" name="Check Final State" flowable:assignee="user" flowable:formFieldValidation="true">
+    <userTask id="CheckFinalState" name="Check Final State" flowable:assignee="user" flowable:formFieldValidation="true" flowable:extensionId="VérificationFinale">
       <documentation>Visualisation de l'état final du processus avant validation</documentation>
     </userTask>
     <sequenceFlow id="sid-D10DB926-2EBE-448D-8AC8-24D8D8A4E7DA" sourceRef="Gateway_0ptspxv" targetRef="CheckFinalState"></sequenceFlow>

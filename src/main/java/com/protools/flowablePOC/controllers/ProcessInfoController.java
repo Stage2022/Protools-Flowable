@@ -2,6 +2,7 @@ package com.protools.flowablePOC.controllers;
 
 import com.protools.flowablePOC.services.WorkflowInfoService;
 import io.swagger.v3.oas.annotations.Operation;
+import org.flowable.bpmn.model.ExtensionElement;
 import org.flowable.bpmn.model.FlowElement;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
@@ -31,17 +32,24 @@ public class ProcessInfoController {
     @Autowired
     private TaskService taskService;
     @CrossOrigin
-    @Operation(summary = "Get BPMN info by process")
-    @GetMapping(value = "/bpmnInfo/{processID}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, FlowElement> getBPMNInfo(@PathVariable String processID){
-        return(workflowInfoService.getBPMNModel(processID));
+    @Operation(summary = "Get BPMN info by processDefinitionID")
+    @GetMapping(value = "/bpmnInfo/{processDefinitionId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, FlowElement> getBPMNInfo(@PathVariable String processDefinitionId){
+        return(workflowInfoService.getBPMNModel(processDefinitionId));
     }
 
     @CrossOrigin
-    @Operation(summary = "Get BPMN documentation by process")
-    @GetMapping(value = "/documentation/{processID}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getBPMNModelDocumentation(@PathVariable String processID){
-        return(workflowInfoService.getBPMNModelDocumentation(processID));
+    @Operation(summary = "Get BPMN documentation by processDefinitionID")
+    @GetMapping(value = "/documentation/{processDefinitionId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getBPMNModelDocumentation(@PathVariable String processDefinitionId){
+        return(workflowInfoService.getBPMNModelDocumentation(processDefinitionId));
+    }
+
+    @CrossOrigin
+    @Operation(summary = "Get BPMN extensions elements by processDefinitionID")
+    @GetMapping(value = "/documentation/{processDefinitionId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, List<ExtensionElement>> getExtensionElements(@PathVariable String processDefinitionId){
+        return(workflowInfoService.getExtension(processDefinitionId));
     }
 
     @CrossOrigin
