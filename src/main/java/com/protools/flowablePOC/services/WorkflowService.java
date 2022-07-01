@@ -25,21 +25,23 @@ public class WorkflowService {
     @Autowired
     private TaskService taskService;
 
-    // Process execution
+    // Process execution and setBusinessKey
     @Transactional
-    public JSONObject startProcess(String ProcessKey){
+    public JSONObject startProcess(String ProcessKey, String BusinessKey){
 
         runtimeService.startProcessInstanceByKey(ProcessKey);
         List<ProcessInstance> liste = runtimeService.createProcessInstanceQuery()
                 .processDefinitionKey(ProcessKey)
                 .list();
         logger.info("Process Instance ID : " + liste.get(0).getId());
+        runtimeService.updateBusinessKey(liste.get(0).getId(), BusinessKey);
 
         JSONObject jsonResponse = new JSONObject();
         jsonResponse.put("id", liste.get(0).getId());
         jsonResponse.put("name",liste.get(0).getName());
         jsonResponse.put("processKey", ProcessKey);
         jsonResponse.put("startTime", liste.get(0).getStartTime());
+        jsonResponse.put("businessKey", liste.get(0).getBusinessKey());
         return(jsonResponse);
 
     }
