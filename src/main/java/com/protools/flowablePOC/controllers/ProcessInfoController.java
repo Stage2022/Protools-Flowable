@@ -47,7 +47,7 @@ public class ProcessInfoController {
 
     @CrossOrigin
     @Operation(summary = "Get BPMN extensions elements by processDefinitionID")
-    @GetMapping(value = "/documentation/{processDefinitionId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/extensionsElement/{processDefinitionId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, List<ExtensionElement>> getExtensionElements(@PathVariable String processDefinitionId){
         return(workflowInfoService.getExtension(processDefinitionId));
     }
