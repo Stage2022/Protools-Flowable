@@ -36,7 +36,7 @@ public class WorkflowService {
                 .processDefinitionKey(ProcessKey)
                 .list();
         logger.info("Process Instance ID : " + liste.get(0).getId());
-        logger.info("Added businessKey to the process "+ liste.get(0).getBusinessKey() );
+        logger.info("Added businessKey to the process :"+ liste.get(0).getBusinessKey() );
 
 
         JSONObject jsonResponse = new JSONObject();

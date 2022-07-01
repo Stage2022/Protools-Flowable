@@ -70,6 +70,7 @@ public class WorkflowInfoService {
             jsonResponse.put("ProcessDefinitionId",liste.get(i).getProcessDefinitionId());
             jsonResponse.put("description", liste.get(i).getDescription());
             jsonResponse.put("businessStatus", liste.get(i).getBusinessStatus());
+            jsonResponse.put("businessKey", liste.get(i).getBusinessKey());
             BpmnModel response = repositoryService.getBpmnModel(liste.get(i).getProcessDefinitionId());
             jsonResponse.put("documentation", response.getMainProcess().getDocumentation());
             jsonArray.put(jsonResponse);
