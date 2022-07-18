@@ -78,4 +78,9 @@ public class WorkflowService {
             logger.info("\t \t >> There are no task for me to complete");
         }
     }
+
+    @Transactional
+    public void deleteProcessInstance( String ProcessID) {
+        runtimeService.deleteProcessInstance(ProcessID, null);
+    }
 }

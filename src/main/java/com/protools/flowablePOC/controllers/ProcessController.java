@@ -45,6 +45,14 @@ public class ProcessController {
         workflowService.completeTask(taskID,variables,assignee);
     }
 
+    @CrossOrigin
+    @Operation(summary = "Delete Process Instance By Process ID")
+    @PostMapping("/deleteProcess/{ProcessID}")
+    public void deleteProcess(@PathVariable String ProcessID) {
+        logger.info(">>> Deleting ProcessInstance :" +ProcessID+" <<<");
+        workflowService.deleteProcessInstance(ProcessID);
+    }
+
 
 
 }
