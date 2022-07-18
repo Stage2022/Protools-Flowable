@@ -83,4 +83,9 @@ public class WorkflowService {
     public void deleteProcessInstance( String ProcessID) {
         runtimeService.deleteProcessInstance(ProcessID, null);
     }
+
+    @Transactional
+    public void suspendProcessInstance( String ProcessID) {
+        runtimeService.suspendProcessInstanceById(ProcessID);
+    }
 }

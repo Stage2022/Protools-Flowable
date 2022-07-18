@@ -53,6 +53,14 @@ public class ProcessController {
         workflowService.deleteProcessInstance(ProcessID);
     }
 
+    @CrossOrigin
+    @Operation(summary = "Suspend Process Instance By Process ID")
+    @PostMapping("/suspendProcess/{ProcessID}")
+    public void suspendProcess(@PathVariable String ProcessID) {
+        logger.info(">>> Suspending ProcessInstance :" +ProcessID+" <<<");
+        workflowService.suspendProcessInstance(ProcessID);
+    }
+
 
 
 }
