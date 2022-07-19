@@ -88,4 +88,9 @@ public class WorkflowService {
     public void suspendProcessInstance( String ProcessID) {
         runtimeService.suspendProcessInstanceById(ProcessID);
     }
+
+    @Transactional
+    public void restartProcessInstance( String ProcessID) {
+        runtimeService.activateProcessInstanceById(ProcessID);
+    }
 }

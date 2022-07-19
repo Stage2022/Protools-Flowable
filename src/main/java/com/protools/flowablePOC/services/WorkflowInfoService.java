@@ -73,6 +73,7 @@ public class WorkflowInfoService {
             jsonResponse.put("businessKey", liste.get(i).getBusinessKey());
             BpmnModel response = repositoryService.getBpmnModel(liste.get(i).getProcessDefinitionId());
             jsonResponse.put("documentation", response.getMainProcess().getDocumentation());
+            jsonResponse.put("isSuspended", liste.get(i).isSuspended());
             jsonArray.put(jsonResponse);
 
         }

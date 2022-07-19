@@ -61,6 +61,14 @@ public class ProcessController {
         workflowService.suspendProcessInstance(ProcessID);
     }
 
+    @CrossOrigin
+    @Operation(summary = "Suspend Process Instance By Process ID")
+    @PostMapping("/restart/{ProcessID}")
+    public void restartProcess(@PathVariable String ProcessID) {
+        logger.info(">>> Activating ProcessInstance :" +ProcessID+" <<<");
+        workflowService.restartProcessInstance(ProcessID);
+    }
+
 
 
 }
