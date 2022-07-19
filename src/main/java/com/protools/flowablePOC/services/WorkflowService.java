@@ -45,6 +45,7 @@ public class WorkflowService {
         jsonResponse.put("processKey", ProcessKey);
         jsonResponse.put("startTime", liste.get(0).getStartTime());
         jsonResponse.put("businessKey", liste.get(0).getBusinessKey());
+        jsonResponse.put("documentation", liste.get(0).getDescription());
         return(jsonResponse);
 
     }
