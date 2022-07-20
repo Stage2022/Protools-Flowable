@@ -61,7 +61,6 @@ public class WorkflowInfoService {
         JSONArray jsonArray = new JSONArray();
         for (int i =0; i<liste.size(); i++) {
             JSONObject jsonResponse = new JSONObject();
-            logger.info("process :" + liste.get(i));
             jsonResponse.put("id", liste.get(i).getId());
             jsonResponse.put("name", liste.get(i).getName());
             jsonResponse.put("processKey", liste.get(i).getProcessDefinitionKey());

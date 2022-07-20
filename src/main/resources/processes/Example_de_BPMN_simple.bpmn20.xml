@@ -5,7 +5,7 @@
     <startEvent id="startEvent1" name="Start Event" flowable:formFieldValidation="true">
       <documentation>Début du processus</documentation>
     </startEvent>
-    <userTask id="sid-1A104F45-7EEC-4F04-9FBB-9539044EEB0A" name="Hello" flowable:formFieldValidation="true">
+    <userTask id="sid-1A104F45-7EEC-4F04-9FBB-9539044EEB0A" name="Hello" flowable:assignee="user" flowable:formFieldValidation="true">
       <documentation>User says Hello</documentation>
     </userTask>
     <sequenceFlow id="sid-DA2C0F06-3C77-4A7B-9209-F5914AABD38E" sourceRef="startEvent1" targetRef="sid-1A104F45-7EEC-4F04-9FBB-9539044EEB0A"></sequenceFlow>
@@ -15,7 +15,7 @@
       </timerEventDefinition>
     </intermediateCatchEvent>
     <sequenceFlow id="sid-E9F290C4-0C29-4180-9673-FB3A2296CED7" sourceRef="sid-1A104F45-7EEC-4F04-9FBB-9539044EEB0A" targetRef="sid-F3F5191D-6816-4CF2-84C6-3D3597A8184E"></sequenceFlow>
-    <userTask id="sid-3B2B322E-7702-420B-A0F4-729381EFE98F" name="Dire au revoir" flowable:formFieldValidation="true">
+    <userTask id="sid-3B2B322E-7702-420B-A0F4-729381EFE98F" name="Dire au revoir" flowable:assignee="user" flowable:formFieldValidation="true">
       <documentation>SayGoodBye</documentation>
     </userTask>
     <sequenceFlow id="sid-855CD851-2362-422A-BB6C-52D2723A679D" sourceRef="sid-F3F5191D-6816-4CF2-84C6-3D3597A8184E" targetRef="sid-3B2B322E-7702-420B-A0F4-729381EFE98F"></sequenceFlow>
