@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef" exporter="Flowable Open Source Modeler" exporterVersion="6.7.2">
+  <process id="BpmnSample" name="Example de BPMN simple" isExecutable="true">
+    <documentation>Ceci est un BPMN tout simple pour compléter celui du POC</documentation>
+    <startEvent id="startEvent1" name="Évennement de début" flowable:formFieldValidation="true"></startEvent>
+    <userTask id="SayHello" name="Say Hello to Everyone" flowable:category="Test" flowable:formFieldValidation="true">
+      <documentation>L'utilisateur dis bonjour</documentation>
+    </userTask>
+    <sequenceFlow id="sid-79A7D0C3-F93B-4FD9-A361-C0979BCD39DB" sourceRef="startEvent1" targetRef="SayHello"></sequenceFlow>
+    <intermediateCatchEvent id="TimerEvent1" name="Event Timer">
+      <documentation>Attente d'une heure avant la prochaine task</documentation>
+      <timerEventDefinition>
+        <timeDuration>PT1H</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="sid-A25DDF29-52A0-40FF-916A-8498A24E18C1" sourceRef="SayHello" targetRef="TimerEvent1"></sequenceFlow>
+    <userTask id="sid-660682E8-6208-4B15-9C39-9452FBCA7480" name="Say Goodbye" flowable:formFieldValidation="true"></userTask>
+    <endEvent id="EndProcess" name="Evenement de fin">
+      <documentation>Fin du processus</documentation>
+    </endEvent>
+    <sequenceFlow id="sid-F970BA56-9432-4628-94E7-5A56E44F8A67" sourceRef="sid-660682E8-6208-4B15-9C39-9452FBCA7480" targetRef="EndProcess"></sequenceFlow>
+    <sequenceFlow id="sid-C0C79382-C34B-4773-8D0C-DAE38941641A" sourceRef="TimerEvent1" targetRef="sid-660682E8-6208-4B15-9C39-9452FBCA7480"></sequenceFlow>
+    <textAnnotation id="Documentation1">
+      <text>Attente 1h</text>
+    </textAnnotation>
+    <association id="sid-28CA43C9-DB2C-43AA-8653-DC70DB5040FB" sourceRef="TimerEvent1" targetRef="Documentation1" associationDirection="None"></association>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_BpmnSample">
+    <bpmndi:BPMNPlane bpmnElement="BpmnSample" id="BPMNPlane_BpmnSample">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="90.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SayHello" id="BPMNShape_SayHello">
+        <omgdc:Bounds height="80.0" width="100.0" x="210.0" y="125.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TimerEvent1" id="BPMNShape_TimerEvent1">
+        <omgdc:Bounds height="31.0" width="31.0" x="375.0" y="149.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-660682E8-6208-4B15-9C39-9452FBCA7480" id="BPMNShape_sid-660682E8-6208-4B15-9C39-9452FBCA7480">
+        <omgdc:Bounds height="80.0" width="100.0" x="480.0" y="123.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndProcess" id="BPMNShape_EndProcess">
+        <omgdc:Bounds height="28.0" width="28.0" x="625.0" y="149.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Documentation1" id="BPMNShape_Documentation1">
+        <omgdc:Bounds height="50.0" width="100.0" x="405.0" y="45.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-79A7D0C3-F93B-4FD9-A361-C0979BCD39DB" id="BPMNEdge_sid-79A7D0C3-F93B-4FD9-A361-C0979BCD39DB" flowable:sourceDockerX="15.0" flowable:sourceDockerY="15.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="119.94999923927439" y="165.0"></omgdi:waypoint>
+        <omgdi:waypoint x="210.0" y="165.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-A25DDF29-52A0-40FF-916A-8498A24E18C1" id="BPMNEdge_sid-A25DDF29-52A0-40FF-916A-8498A24E18C1" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="16.0" flowable:targetDockerY="16.0">
+        <omgdi:waypoint x="309.94999999999357" y="165.1906488549618"></omgdi:waypoint>
+        <omgdi:waypoint x="375.0000092162973" y="165.43893173325333"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-F970BA56-9432-4628-94E7-5A56E44F8A67" id="BPMNEdge_sid-F970BA56-9432-4628-94E7-5A56E44F8A67" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="14.0" flowable:targetDockerY="14.0">
+        <omgdi:waypoint x="579.95" y="163.0"></omgdi:waypoint>
+        <omgdi:waypoint x="625.0" y="163.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-28CA43C9-DB2C-43AA-8653-DC70DB5040FB" id="BPMNEdge_sid-28CA43C9-DB2C-43AA-8653-DC70DB5040FB" flowable:sourceDockerX="16.0" flowable:sourceDockerY="16.0" flowable:targetDockerX="1.0" flowable:targetDockerY="24.0">
+        <omgdi:waypoint x="393.45020244102426" y="149.68761843479268"></omgdi:waypoint>
+        <omgdi:waypoint x="405.0" y="75.11166666666658"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-C0C79382-C34B-4773-8D0C-DAE38941641A" id="BPMNEdge_sid-C0C79382-C34B-4773-8D0C-DAE38941641A" flowable:sourceDockerX="16.0" flowable:sourceDockerY="16.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="406.9474728069561" y="165.21227581142367"></omgdi:waypoint>
+        <omgdi:waypoint x="479.9999999999993" y="163.89838129496403"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
