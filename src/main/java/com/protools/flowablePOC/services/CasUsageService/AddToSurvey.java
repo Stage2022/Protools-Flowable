@@ -6,8 +6,8 @@ import com.google.gson.Gson;
 import com.protools.flowablePOC.beans.Person;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.delegate.JavaDelegate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 @Component
 public class AddToSurvey implements JavaDelegate {
-    private Logger logger = LoggerFactory.getLogger(AddToSurvey.class);
+    private Logger logger =LogManager.getLogger(AddToSurvey.class);
     @Override
     public void execute(DelegateExecution delegateExecution) {
         logger.info("\t >> Add unit to survey");

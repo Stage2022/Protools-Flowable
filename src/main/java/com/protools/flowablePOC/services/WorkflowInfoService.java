@@ -11,8 +11,8 @@ import org.flowable.job.service.JobService;
 import org.flowable.task.api.Task;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class WorkflowInfoService {
-    private Logger logger = LoggerFactory.getLogger(WorkflowInfoService.class);
+    private Logger logger =LogManager.getLogger(WorkflowInfoService.class);
     @Autowired
     private RuntimeService runtimeService;
 

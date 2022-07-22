@@ -2,8 +2,8 @@ package com.protools.flowablePOC.services.CasUsageService;
 
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.delegate.JavaDelegate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.net.http.HttpResponse;
 
 @Component
 public class DrawUnit implements JavaDelegate {
-    private Logger logger = LoggerFactory.getLogger(DrawUnit.class);
+    private Logger logger =LogManager.getLogger(DrawUnit.class);
 
     @Override
     public void execute(DelegateExecution delegateExecution) {

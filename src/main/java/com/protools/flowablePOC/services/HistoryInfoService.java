@@ -7,8 +7,8 @@ import org.flowable.engine.TaskService;
 import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.task.api.history.HistoricTaskInstance;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 @Service
 public class HistoryInfoService {
-    private Logger logger = LoggerFactory.getLogger(HistoryInfoService.class);
+    private Logger logger =LogManager.getLogger(HistoryInfoService.class);
     @Autowired
     private HistoryService historyService;
 

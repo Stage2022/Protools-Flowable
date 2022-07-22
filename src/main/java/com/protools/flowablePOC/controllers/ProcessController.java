@@ -6,8 +6,8 @@ import com.protools.flowablePOC.services.WorkflowInfoService;
 import com.protools.flowablePOC.services.WorkflowService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 @RestController
 public class ProcessController {
-    private Logger logger = LoggerFactory.getLogger(ProcessController.class);
+    private Logger logger =LogManager.getLogger(ProcessController.class);
     @Autowired
     private WorkflowService workflowService;
 

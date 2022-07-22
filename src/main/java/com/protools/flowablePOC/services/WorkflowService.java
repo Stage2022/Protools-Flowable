@@ -7,8 +7,8 @@ import org.flowable.engine.runtime.ProcessInstanceBuilder;
 import org.flowable.task.api.Task;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Service
 public class WorkflowService {
-    private Logger logger = LoggerFactory.getLogger(WorkflowService.class);
+    private Logger logger =LogManager.getLogger(WorkflowService.class);
     @Autowired
     private RuntimeService runtimeService;
 
