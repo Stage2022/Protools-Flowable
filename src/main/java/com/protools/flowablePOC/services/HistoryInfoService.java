@@ -23,7 +23,7 @@ public class HistoryInfoService {
     @Transactional
     public List<HistoricProcessInstance> getHistoryProcess(){
         List<HistoricProcessInstance> response = historyService.createHistoricProcessInstanceQuery()
-                .finished().listPage(0,10);
+                .finished().orderByProcessInstanceStartTime().desc().listPage(0,100);
 
         return (response);
     };
@@ -31,14 +31,14 @@ public class HistoryInfoService {
     @Transactional
     public List<HistoricTaskInstance> getHistoryTask(String processDefinitionID){
         List<HistoricTaskInstance> response = historyService.createHistoricTaskInstanceQuery()
-                .processDefinitionId(processDefinitionID).listPage(0,10);
+                .processDefinitionId(processDefinitionID).listPage(0,100);
 
         return (response);
     };
 
     @Transactional
     public List<HistoricActivityInstance> getHistoryActivity(){
-        List<HistoricActivityInstance> response = historyService.createHistoricActivityInstanceQuery().listPage(0,10);
+        List<HistoricActivityInstance> response = historyService.createHistoricActivityInstanceQuery().orderByHistoricActivityInstanceStartTime().desc().listPage(0,100);
         return response;
     }
 }
