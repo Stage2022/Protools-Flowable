@@ -4,6 +4,7 @@ import com.protools.flowablePOC.services.HistoryInfoService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.engine.history.HistoricProcessInstance;
+import org.flowable.job.api.Job;
 import org.flowable.task.api.history.HistoricTaskInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -39,4 +40,17 @@ public class HistoryInfoController {
         return(historyInfoService.getHistoryActivity());
     }
 
+    @CrossOrigin
+    @Operation(summary = "Get DeadLetter Jobs")
+    @GetMapping(value = "/history/deadLetter", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Job> getDeadJobs(){
+        return(historyInfoService.getFailedJobs());
+    }
+
+    @CrossOrigin
+    @Operation(summary = "Get Suspended Jobs")
+    @GetMapping(value = "/history/suspended", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Job> getSuspendedJobs(){
+        return(historyInfoService.getSuspendedJobs());
+    }
 }

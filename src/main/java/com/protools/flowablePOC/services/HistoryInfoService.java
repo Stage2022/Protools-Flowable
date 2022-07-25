@@ -1,11 +1,9 @@
 package com.protools.flowablePOC.services;
 
-import org.flowable.engine.HistoryService;
-import org.flowable.engine.RepositoryService;
-import org.flowable.engine.RuntimeService;
-import org.flowable.engine.TaskService;
+import org.flowable.engine.*;
 import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.engine.history.HistoricProcessInstance;
+import org.flowable.job.api.Job;
 import org.flowable.task.api.history.HistoricTaskInstance;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +17,9 @@ public class HistoryInfoService {
     private Logger logger =LogManager.getLogger(HistoryInfoService.class);
     @Autowired
     private HistoryService historyService;
+
+    @Autowired
+    private ManagementService managementService;
 
     @Transactional
     public List<HistoricProcessInstance> getHistoryProcess(){
@@ -41,4 +42,20 @@ public class HistoryInfoService {
         List<HistoricActivityInstance> response = historyService.createHistoricActivityInstanceQuery().orderByHistoricActivityInstanceStartTime().desc().listPage(0,100);
         return response;
     }
+
+    @Transactional
+    public List<Job> getFailedJobs(){
+        List<Job> response = managementService.createDeadLetterJobQuery().orderByJobCreateTime().desc().listPage(0,100);
+        return response;
+
+    }
+
+    @Transactional
+    public List<Job> getSuspendedJobs(){
+        List<Job> response = managementService.createSuspendedJobQuery().orderByJobCreateTime().desc().listPage(0,100);
+        return response;
+
+    }
+
+
 }
