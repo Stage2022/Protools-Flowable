@@ -53,4 +53,12 @@ public class HistoryInfoController {
     public List<Job> getSuspendedJobs(){
         return(historyInfoService.getSuspendedJobs());
     }
+
+    @CrossOrigin
+    @Operation(summary = "Get deleted Processes")
+    @GetMapping(value = "/history/deleted", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<HistoricProcessInstance> getDeletedProcesses(){
+        return(historyInfoService.getDeletedProcess());
+    }
+
 }

@@ -57,5 +57,11 @@ public class HistoryInfoService {
 
     }
 
+    @Transactional
+    public List<HistoricProcessInstance> getDeletedProcess(){
+        List<HistoricProcessInstance> response = historyService.createHistoricProcessInstanceQuery().deleted().orderByProcessInstanceStartTime().desc().listPage(0,100);
+        return response;
+    }
+
 
 }
