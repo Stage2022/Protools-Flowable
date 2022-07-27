@@ -68,7 +68,13 @@ public class ProcessController {
         logger.info(">>> Activating ProcessInstance :" +ProcessID+" <<<");
         workflowService.restartProcessInstance(ProcessID);
     }
-
+    @CrossOrigin
+    @Operation(summary = "CancelProcess Instance By Process ID")
+    @PostMapping("/cancelProcess/{ProcessID}/{reason}")
+    public void cancelProcess(@PathVariable String ProcessID, @PathVariable String reason) {
+        logger.info(">>> Cancelling ProcessInstance :" +ProcessID+" <<<");
+        workflowService.cancelProcessWithReason(ProcessID,reason);
+    }
 
 
 }

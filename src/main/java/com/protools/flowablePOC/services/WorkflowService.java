@@ -94,4 +94,9 @@ public class WorkflowService {
     public void restartProcessInstance( String ProcessID) {
         runtimeService.activateProcessInstanceById(ProcessID);
     }
+
+    @Transactional
+    public void cancelProcessWithReason( String ProcessID, String reason) {
+        runtimeService.deleteProcessInstance(ProcessID, reason);
+    }
 }
