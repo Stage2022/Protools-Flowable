@@ -74,6 +74,9 @@ public class WorkflowInfoService {
             jsonResponse.put("documentation", response.getMainProcess().getDocumentation());
             jsonResponse.put("isSuspended", liste.get(i).isSuspended());
             jsonResponse.put("isEnded", liste.get(i).isEnded());
+            List<Job> deadLetterList = processEngine.getManagementService().createDeadLetterJobQuery().processInstanceId(liste.get(i).getId()).list();
+            jsonResponse.put("deadLetterList", deadLetterList.size());
+
             jsonArray.put(jsonResponse);
 
         }
